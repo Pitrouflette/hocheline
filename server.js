@@ -43,8 +43,8 @@ io.on('connection', (socket) => {
     return clientIp;
   });
 
-  socket.on('chat message', (message) => {
-    io.emit("display message", message);
+  socket.on('chat message', (msgNom) => {
+    io.emit("display message", msgNom);
   });
 
   socket.on('create_article', (articleHTML) => {

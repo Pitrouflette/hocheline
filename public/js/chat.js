@@ -6,13 +6,8 @@ const sendButton = document.getElementById('send-btn');
 const articlesContainer = document.getElementById('rumor-container');
 const welcomeText = document.getElementById('romor-title').textContent;
 
-socket.on('display message', (message) => {
-  const messageData = {
-    username: localStorage.getItem('username'),
-    message: message
-  };
-  console.log(messageData.username, messageData.message);
-  socket.emit("check admin", messageData);
+socket.on('display message', (msgNom) => {
+  socket.emit("check admin", msgNom);
 
 });
 
@@ -40,7 +35,11 @@ socket.on('display_article', (articleHTML) => {
 function sendMessage(){
   const message = messageInput.value;
   if (message.trim() !== '') {
-    socket.emit('chat message', message);
+    const msgNom = {
+      username: localStorage.getItem("username"),
+      message: message
+    };
+    socket.emit('chat message', msgNom);
     messageInput.value = '';
   }
 }
