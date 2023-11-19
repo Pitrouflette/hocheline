@@ -11,6 +11,7 @@ socket.on('display message', (message) => {
     username: localStorage.getItem('username'),
     message: message
   };
+  console.log(messageData.username, messageData.message);
   socket.emit("check admin", messageData);
 
 });

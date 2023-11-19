@@ -87,19 +87,20 @@ io.on('connection', (socket) => {
   socket.on("check admin", (messageData) => {
     sql = "SELECT * FROM users WHERE username = ? AND admin = 'true'";
     loginDB.get(sql, [messageData.username], (err, row) => {
+      console.log(messageData.username);
       if (err) {
         console.error(err.message);
         return;
       }
       if (row) {
-        console.log(messageData.username + " est admin");
+        console.log(messageData.username);
         messageData.check = "admin";
-        messageData.message = messageData.username + " >> " + messageData.message;
+        messageData.message = messageData.username + " >>> " + messageData.message;
         socket.emit("display message checked", messageData);
       } else {
-        console.log(messageData.username + " n'est pas admin");
+        console.log(messageData.username);
         messageData.check = "user";
-        messageData.message = messageData.username + " >> " + messageData.message;
+        messageData.message = messageData.username + " >>> " + messageData.message;
         socket.emit("display message checked", messageData);
       }
     });
