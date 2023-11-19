@@ -24,13 +24,6 @@ socket.on('online count', (onlineCount) => {
   onlineCountElement.title = `${onlineCount/2} connecté(es) 🔴`;
 });
 
-socket.on('display_article', (articleHTML) => {
-  const articleElement = document.createElement('article');
-  articleElement.innerHTML = articleHTML;
-  articlesContainer.appendChild(articleElement);
-  localStorage.setItem('article', articleHTML);
-});
-
 function sendMessage(){
   const message = messageInput.value;
   if (message.trim() !== '') {
@@ -42,7 +35,6 @@ function sendMessage(){
     messageInput.value = '';
   }
 }
-
 
 sendButton.addEventListener('click', () => {
   socket.emit('send message');

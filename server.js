@@ -47,9 +47,6 @@ io.on('connection', (socket) => {
     io.emit("display message", msgNom);
   });
 
-  socket.on('create_article', (articleHTML) => {
-    socket.broadcast.emit('display_article', articleHTML);
-  });
 
   // DATABASE HANDLER
   socket.on("login", (username, password) => {

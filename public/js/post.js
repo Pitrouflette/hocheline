@@ -1,3 +1,5 @@
+const { json } = require("express");
+
 const socks = io();
 
 const submit = document.querySelector('.submit');
@@ -68,20 +70,12 @@ submit.addEventListener('click', () => {
   article.appendChild(img);
   article.appendChild(textColumn);
 
-  socks.emit('create_article', article.outerHTML);
-
-  var articleHTML = article.outerHTML;
-
-  localStorage.setItem('article', articleHTML);
-
+  var jsonContent = JSON.stringify(dataObject, null, 2);
+  
   titleInput.value = "";
   descriptionInput.value = "";
   imageInput.value = "";
 
   window.location.reload();
 
-});
-
-window.addEventListener('load', function () {
-  greetHeader.innerHTML = "Bienvenue " + localStorage.getItem('username') + " !";
 });
