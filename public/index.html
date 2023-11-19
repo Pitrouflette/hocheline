@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>G'Hocheip</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+</head>
+<body>
+  <div id="container">
+    <div id="message-container"></div>
+    <input type="text" id="user-message" placeholder="envoyer un message">
+    <button id="send-btn">→</button>
+    <span id="online-count">🔴</span>
+    <h1 id="romor-title">Bienvenu [username] !</h1>
+
+    <div id="rumor-container">
+
+    </div>
+  </div>
+
+  <div id="cta-form">
+    <h1 class="post-header">Poster un elément :</h1>
+    <form action="" class="forme">
+      
+      <input type="text" required class="form__input" id="title" />
+      <label for="title" class="form__label">Titre</label>
+
+      <input type="text" required class="form__input" id="description" />
+      <label for="description" class="form__label">Texte</label>
+
+      <input type="file" required class="form__input" id="image" />
+      <label for="image" class="form__label">Image</label>
+
+      <button class="submit">Poster</button>
+      
+    </form>
+  </div>
+
+  <div class="footer">
+
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/post.js"></script>
+  <script src="js/protected_pages.js"></script>
+</body>
+</html>
