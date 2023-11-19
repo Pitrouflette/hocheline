@@ -8,7 +8,6 @@ const welcomeText = document.getElementById('romor-title').textContent;
 
 socket.on('display message', (msgNom) => {
   socket.emit("check admin", msgNom);
-
 });
 
 socket.on("display message checked", (messageData) => {

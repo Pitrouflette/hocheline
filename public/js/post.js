@@ -1,8 +1,6 @@
 const socks = io();
 
-const submit = document.querySelector('.submit')
-
-let articleCount = 0;
+const submit = document.querySelector('.submit');
 
 let articleListStorage  = [];
 
@@ -45,44 +43,36 @@ submit.addEventListener('click', () => {
   if(!selectedFile){
     return;
   }
+
   var article = document.createElement('article');
   article.classList.add('cta');
-
   var rumor = document.getElementById("rumor-container");
   rumor.appendChild(article);
-
   var textColumn = document.createElement('div');
   textColumn.classList.add('cta__text-column');
-
   var h2 = document.createElement('h2');
   if (titleValue) {
     h2.textContent = titleValue;
   }
-  
   var p = document.createElement('p');
   if (descriptionValue) {
     p.textContent = descriptionValue;
   }
-  
   var img = document.createElement('img');
-
   if (selectedFile) {
     var imageUrl = URL.createObjectURL(selectedFile);
     img.src = "../images/" + selectedFile.name;
   }
-
   textColumn.appendChild(h2);
   textColumn.appendChild(p);
-
   article.appendChild(img);
   article.appendChild(textColumn);
 
   socks.emit('create_article', article.outerHTML);
 
-  articleCount += 1; 
-
   var articleHTML = article.outerHTML;
-  localStorage.setItem('article' + article, articleHTML);
+
+  localStorage.setItem('article', articleHTML);
 
   titleInput.value = "";
   descriptionInput.value = "";
@@ -90,34 +80,6 @@ submit.addEventListener('click', () => {
 
   window.location.reload();
 
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  console.log("1");
-
-  for (let i = 0; i <= articleCount; i++) {
-    articleListStorage.join('article' + i);
-    console.log(i);
-  }
-  
-  if (articleListStorage) {
-
-    console.log("2");
-
-    articleListStorage.forEach((article) => {
-
-      console.log("3" + article.innerHTML);
-
-      var tempDiv = document.createElement('div');
-      tempDiv.innerHTML = article.innerHTML;
-
-      var container = document.getElementById('rumor-container');
-      container.appendChild(tempDiv.firstElementChild);
-
-    });
-    
-  }
 });
 
 window.addEventListener('load', function () {
