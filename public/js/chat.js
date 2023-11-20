@@ -49,4 +49,5 @@ messageInput.addEventListener('keydown', (event) => {
 
 window.addEventListener('load', function () {
   greetHeader.innerHTML = "Bienvenue " + localStorage.getItem('username') + " !";
+  socket.emit("display post", postVar);
 });

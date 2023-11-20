@@ -1,10 +1,18 @@
-const { json } = require("express");
-
 const socks = io();
 
 const submit = document.querySelector('.submit');
 
-let articleListStorage  = [];
+socket.on("display post", (postList) => {
+  console.log(postList);
+  var rumor = document.getElementById("rumor-container");
+  rumor.innerHTML = "";
+  for (var element of postList) {
+    console.log(element);
+    const article = document.createElement('article');
+    article.innerHTML = element;
+    rumor.appendChild(article);
+  }  
+});
 
 submit.addEventListener('click', () => {
 
@@ -70,7 +78,7 @@ submit.addEventListener('click', () => {
   article.appendChild(img);
   article.appendChild(textColumn);
 
-  var jsonContent = JSON.stringify(dataObject, null, 2);
+  socks.emit("register post", article.innerHTML);
   
   titleInput.value = "";
   descriptionInput.value = "";

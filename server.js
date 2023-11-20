@@ -8,10 +8,14 @@ const path = require('path');
 const port = 3000;
 const sqlite3 = require('sqlite3').verbose();
 
+const filePath = 'public/posts/post.json';
+
 app.use(express.static('public'));
 
 let onlineCount = 0;
 let sql;
+
+var postVar = "";
 
 const loginDB = new sqlite3.Database('public/db/users.db', sqlite3.OPEN_READWRITE, (err) => {
   if(err) return console.error(err.message);
@@ -31,7 +35,7 @@ io.on('connection', (socket) => {
   onlineCount++;
 
   io.emit('online count', onlineCount);
-
+  io.emit("display post", postVar);
 
   socket.on('disconnect', () => {
     onlineCount--;
@@ -47,6 +51,53 @@ io.on('connection', (socket) => {
     io.emit("display message", msgNom);
   });
 
+  socket.on('register post', (innerHTML) => {
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      let jsonData = {};
+  
+      if (err) {
+          if (err.code !== 'ENOENT') {
+              console.error('Erreur lors de la lecture du fichier JSON :', err);
+              return;
+          }
+      } else {
+          // Vérifier si la chaîne JSON n'est pas vide
+          if (data.trim() !== '') {
+              // Analyser le JSON existant
+              try {
+                  jsonData = JSON.parse(data);
+              } catch (jsonErr) {
+                  console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
+                  return;
+              }
+          }
+      }
+      // Vérifier si la propriété 'elements' existe dans le JSON
+      if (!jsonData.elements) {
+          jsonData.elements = [];
+      }
+  
+      // Ajouter le nouvel élément au tableau 'elements'
+      jsonData.elements.push({
+          innerHTML: innerHTML
+      });
+  
+      // Convertir l'objet JavaScript en JSON
+      const updatedJsonContent = JSON.stringify(jsonData, null, 2);
+  
+      // Réécrire le fichier avec les nouvelles données
+      fs.writeFile(filePath, updatedJsonContent, 'utf8', (writeErr) => {
+          if (writeErr) {
+              console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
+              return;
+          }
+          console.log('Nouvel élément ajouté avec succès au fichier JSON.');
+      });
+      postVar = creerListeDepuisObjet(jsonData.elements);
+      io.emit("display post", postVar);
+    });
+  });
 
   // DATABASE HANDLER
   socket.on("login", (username, password) => {
@@ -102,8 +153,36 @@ io.on('connection', (socket) => {
       }
     });
   });
-  
 });
+
+function creerListeDepuisObjet(obj) {
+  try {
+    // Vérifiez si l'objet est un tableau (liste)
+    if (Array.isArray(obj)) {
+      // Créez une liste (ul) dans le document HTML
+      const liste = [];
+
+      // Parcourez chaque élément du tableau et ajoutez-le à la liste
+      obj.forEach((element) => {
+        if (element.innerHTML) {
+          liste.push(element.innerHTML);
+        } else {
+          // Si l'objet n'a pas de propriété 'nom', ajoutez une représentation par défaut
+          liste.push('[Object sans propriété nom]');
+        }
+      });
+
+      // Retournez la liste
+      return liste;
+    } else {
+      console.error('L\'objet ne représente pas un tableau.');
+      return null; // ou une autre valeur par défaut
+    }
+  } catch (error) {
+    console.error('Erreur lors de la création de la liste :', error);
+    return null; // ou une autre valeur par défaut
+  }
+}
 
 // Configuration de Multer pour spécifier où les fichiers téléchargés seront stockés
 const storage = multer.diskStorage({
