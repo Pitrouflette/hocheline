@@ -40,7 +40,6 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     onlineCount--;
     io.emit('online count', onlineCount);
-    console.log('Un client s\'est déconnecté');
   });
 
   socket.on('getIP', () => {
@@ -135,18 +134,15 @@ io.on('connection', (socket) => {
   socket.on("check admin", (messageData) => {
     sql = "SELECT * FROM users WHERE username = ? AND admin = 'true'";
     loginDB.get(sql, [messageData.username], (err, row) => {
-      console.log(messageData.username);
       if (err) {
         console.error(err.message);
         return;
       }
       if (row) {
-        console.log(messageData.username);
         messageData.check = "admin";
         messageData.message = messageData.username + " >>> " + messageData.message;
         socket.emit("display message checked", messageData);
       } else {
-        console.log(messageData.username);
         messageData.check = "user";
         messageData.message = messageData.username + " >>> " + messageData.message;
         socket.emit("display message checked", messageData);
@@ -207,9 +203,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Démarrer le serveur
 app.listen(port, () => {
-  console.log(`Serveur en cours d'exécution sur le port ${port}`);
+  console.log(`██   ██  ██████   ██████ ██   ██ ███████ ██      ██ ███    ██ ███████     ██     ██ ███████ ██████   █████  ██████  ██████  
+██   ██ ██    ██ ██      ██   ██ ██      ██      ██ ████   ██ ██          ██     ██ ██      ██   ██ ██   ██ ██   ██ ██   ██ 
+███████ ██    ██ ██      ███████ █████   ██      ██ ██ ██  ██ █████       ██  █  ██ █████   ██████  ███████ ██████  ██████  
+██   ██ ██    ██ ██      ██   ██ ██      ██      ██ ██  ██ ██ ██          ██ ███ ██ ██      ██   ██ ██   ██ ██      ██      
+██   ██  ██████   ██████ ██   ██ ███████ ███████ ██ ██   ████ ███████      ███ ███  ███████ ██████  ██   ██ ██      ██      
+                                                                                                                            
+                                                                                                                            `);
 });
 
 http.listen(port, '0.0.0.0', () => {
-  console.log(`Serveur démarré sur le port ${port}`);
+  console.log(`Serveur est bien démarré sur le port ${port}`);
 });

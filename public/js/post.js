@@ -3,11 +3,9 @@ const socks = io();
 const submit = document.querySelector('.submit');
 
 socket.on("display post", (postList) => {
-  console.log(postList);
   var rumor = document.getElementById("rumor-container");
   rumor.innerHTML = "";
   for (var element of postList) {
-    console.log(element);
     const article = document.createElement('article');
     article.innerHTML = element;
     rumor.appendChild(article);
