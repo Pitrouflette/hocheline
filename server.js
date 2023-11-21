@@ -61,9 +61,7 @@ io.on('connection', (socket) => {
               return;
           }
       } else {
-          // Vérifier si la chaîne JSON n'est pas vide
           if (data.trim() !== '') {
-              // Analyser le JSON existant
               try {
                   jsonData = JSON.parse(data);
               } catch (jsonErr) {
@@ -72,20 +70,16 @@ io.on('connection', (socket) => {
               }
           }
       }
-      // Vérifier si la propriété 'elements' existe dans le JSON
       if (!jsonData.elements) {
           jsonData.elements = [];
       }
   
-      // Ajouter le nouvel élément au tableau 'elements'
       jsonData.elements.push({
           innerHTML: innerHTML
       });
   
-      // Convertir l'objet JavaScript en JSON
       const updatedJsonContent = JSON.stringify(jsonData, null, 2);
   
-      // Réécrire le fichier avec les nouvelles données
       fs.writeFile(filePath, updatedJsonContent, 'utf8', (writeErr) => {
           if (writeErr) {
               console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
@@ -153,55 +147,45 @@ io.on('connection', (socket) => {
 
 function creerListeDepuisObjet(obj) {
   try {
-    // Vérifiez si l'objet est un tableau (liste)
     if (Array.isArray(obj)) {
-      // Créez une liste (ul) dans le document HTML
       const liste = [];
 
-      // Parcourez chaque élément du tableau et ajoutez-le à la liste
       obj.forEach((element) => {
         if (element.innerHTML) {
           liste.push(element.innerHTML);
         } else {
-          // Si l'objet n'a pas de propriété 'nom', ajoutez une représentation par défaut
           liste.push('[Object sans propriété nom]');
         }
       });
 
-      // Retournez la liste
       return liste;
     } else {
       console.error('L\'objet ne représente pas un tableau.');
-      return null; // ou une autre valeur par défaut
+      return null;
     }
   } catch (error) {
     console.error('Erreur lors de la création de la liste :', error);
-    return null; // ou une autre valeur par défaut
+    return null;
   }
 }
 
-// Configuration de Multer pour spécifier où les fichiers téléchargés seront stockés
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, 'public', 'images')); // Utilisez le chemin absolu du dossier 'images'
+    cb(null, path.join(__dirname, 'public', 'images'));
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); // Utilisez le nom d'origine du fichier
+    cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
 
-// Gérez le téléchargement de fichiers
 app.post('/upload', upload.single('image'), (req, res) => {
-  // Si tout se passe bien, le fichier sera téléchargé dans le dossier 'public/images'
   res.send('Fichier téléchargé avec succès !');
 });
 
-// Servez les fichiers statiques dans le dossier 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Démarrer le serveur
 app.listen(port, () => {
   console.log(`██   ██  ██████   ██████ ██   ██ ███████ ██      ██ ███    ██ ███████     ██     ██ ███████ ██████   █████  ██████  ██████  
 ██   ██ ██    ██ ██      ██   ██ ██      ██      ██ ████   ██ ██          ██     ██ ██      ██   ██ ██   ██ ██   ██ ██   ██ 
