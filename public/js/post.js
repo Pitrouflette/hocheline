@@ -6,7 +6,8 @@ socket.on("display post", (postList) => {
   var rumor = document.getElementById("rumor-container");
   rumor.innerHTML = "";
   for (var element of postList) {
-    const article = document.createElement('article');
+    const article = document.createElement('div');
+    article.classList.add("cta");
     article.innerHTML = element;
     rumor.appendChild(article);
   }  
@@ -52,7 +53,7 @@ submit.addEventListener('click', () => {
     return;
   }
 
-  var article = document.createElement('article');
+  var article = document.createElement('div');
   article.classList.add('cta');
   var rumor = document.getElementById("rumor-container");
   rumor.appendChild(article);
