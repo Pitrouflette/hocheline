@@ -13,6 +13,7 @@ submit.addEventListener('click', () => {
     };
 
     socket.emit("sign up", userData);
+    window.location.href = 'index.html';
 
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";

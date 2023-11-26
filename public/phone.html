@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Hocheline</title>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+  <meta name="theme-color" content="#2f3136">
+  <link rel="stylesheet" type="text/css" href="css/phone.css">
 </head>
 <body>
+  <header>
+    <h1>Hocheline</h1>
+  </header>
+
+  <nav>
+    <a href="#">Chat</a>
+    <a href="#rumor-container">Fil d'actualité</a>
+    <a href="#rumor-container">Poster</a>
+  </nav>
+
   <div id="container">
+
     <div id="message-container"></div>
     <input type="text" id="user-message" placeholder="envoyer un message">
     <button id="send-btn">→</button>
-    <span id="online-count">🔴</span>
-    <h1 id="romor-title">Bienvenue [username] !</h1>
 
-    <div id="rumor-container">
-    </div>
+    <div id="rumor-container"></div>
+
   </div>
 
   <div id="cta-form">
-    <h1 class="post-header">Poster un elément :</h1>
+    <h1 class="post-header">Poster un elément</h1>
     <form action="" class="forme">
       
       <input type="text" required class="form__input" id="title" />
@@ -38,13 +45,12 @@
     </form>
   </div>
 
-  <div class="footer">
-
-  </div>
-
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-  <script src="js/chat.js"></script>
+  <script src="js/phone_chat.js"></script>
   <script src="js/post.js"></script>
-  <script src="js/protected_pages.js"></script>
+  <script src="js/protected_page_phone.js"></script>
+
 </body>
 </html>
+
+

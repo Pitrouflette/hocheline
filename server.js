@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
   onlineCount++;
 
   io.emit('online count', onlineCount);
-  io.emit("display post", postVar);
+  io.emit('display post', postVar);
 
   socket.on('disconnect', () => {
     onlineCount--;
@@ -73,11 +73,11 @@ io.on('connection', (socket) => {
       if (!jsonData.elements) {
           jsonData.elements = [];
       }
-  
+      
       jsonData.elements.push({
-          innerHTML: innerHTML
+        innerHTML: innerHTML
       });
-  
+      
       const updatedJsonContent = JSON.stringify(jsonData, null, 2);
   
       fs.writeFile(filePath, updatedJsonContent, 'utf8', (writeErr) => {
