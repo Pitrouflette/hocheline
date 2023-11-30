@@ -20,7 +20,7 @@ body::-webkit-scrollbar{
 #message-container {
   grid-column: 3 / 4;
   grid-row: 1 / 3;
-  height: 92%;
+  height: 50rem;
   background-color: #36393f;
   border-radius: 2%;
   color: #fff;
@@ -37,11 +37,11 @@ body::-webkit-scrollbar{
 
 .message {
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 .admin-message, .server-message, .admin2-message{
   padding: 10px;
-  border-radius: 2%;
 }
 
 .admin-message {

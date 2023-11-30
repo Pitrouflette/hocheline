@@ -56,7 +56,8 @@ input, textarea {
 #message-container {
     grid-column: 1/4;
     grid-row: 1/8;
-    height: 99%;
+    height: 35rem;
+    max-height: 99%;
     background-color: #36393f;
     border-radius: 2cqb;
     color: #fff;
@@ -69,7 +70,7 @@ input, textarea {
 
 .admin-message, .server-message, .admin2-message{
   padding: 10px;
-  border-radius: 2%;
+  border-radius: 10px;
 }
 
 .admin-message {
