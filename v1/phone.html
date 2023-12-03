@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#2f3136">
+  <link rel="stylesheet" type="text/css" href="css/phone.css">
+</head>
+<body>
+  <header>
+    <h1>Hocheline</h1>
+  </header>
+
+  <nav>
+    <a href="#">Chat</a>
+    <a href="#rumor-container">Fil d'actualité</a>
+    <a href="#post__id">Poster</a>
+  </nav>
+
+  <div id="container">
+
+    <div id="message-container"></div>
+    <input type="text" id="user-message" placeholder="envoyer un message">
+    <button id="send-btn">→</button>
+
+    <div id="rumor-container"></div>
+
+  </div>
+
+  <div id="cta-form">
+    <h1 class="post-header">Poster un elément</h1>
+    <form action="" class="forme">
+      
+      <input type="text" required class="form__input" id="title" />
+      <label for="title" class="form__label">Titre</label>
+
+      <input type="text" required class="form__input" id="description" />
+      <label for="description" class="form__label">Texte</label>
+
+      <input type="file" required class="form__input" id="image" />
+      <label for="image" class="form__label">Image</label>
+
+      <button class="submit" id="post__id">Poster</button>
+      
+    </form>
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="js/phone_chat.js"></script>
+  <script src="js/post.js"></script>
+  <script src="js/protected_page_phone.js"></script>
+  
+
+</body>
+</html>
+
+

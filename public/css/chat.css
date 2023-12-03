@@ -1,0 +1,77 @@
+body{
+    background-color: white;
+}
+div.header {
+    border-color: black;
+    text-decoration: none;
+    color: black;
+    border: solid 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    font-size: 1.5rem;
+}
+div.footer{
+    padding: 1rem;
+    margin-top: 3rem;
+    border: solid 5px;
+    display: flex;
+    justify-content: center;
+}
+div.container{
+    margin-top: 2rem;
+    height: 50rem;
+    max-height: 100%;
+    border: solid 5px;
+    overflow-y: scroll;
+}
+div.container::-webkit-scrollbar{
+    width: 0px;
+}
+div.send-message{
+    border: solid 5px;
+    padding: 1rem;
+    margin-top: 0.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+input{
+    border: none !important;
+    width: 100%;
+    height: 2rem;
+}
+input:focus{
+    outline: none;
+}
+button{
+    width: 4rem;
+    border: solid 2px black !important;
+    background-color: white;
+}
+button:hover{
+    cursor: pointer;
+    color: white;
+    background-color: black;
+
+}
+/* MESSAGE */
+.message {
+    margin: 0.2rem;
+    height: fit-content;
+    border: solid 2px black !important;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.admin2-message {
+  color: black;
+  font-size: larger;
+  background-color: gray;
+}

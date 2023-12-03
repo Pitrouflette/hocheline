@@ -1,0 +1,68 @@
+body{
+    background-color: white;
+}
+div.header {
+    border-color: black;
+    text-decoration: none;
+    color: black;
+    border: solid 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    font-size: 1.5rem;
+}
+div.footer{
+    padding: 1rem;
+    margin-top: 3rem;
+    border: solid 5px;
+    display: flex;
+    justify-content: center;
+}
+div.container{
+    margin-top: 2rem;
+    height: 50rem;
+    max-height: 100%;
+    border: solid 5px;
+    overflow-y: scroll;
+}
+div.container::-webkit-scrollbar{
+    width: 0px;
+}
+/* POST */
+.cta {
+  margin: 0.2rem;
+  display: flex;
+  border-radius: 25px;
+  padding: 20px;
+  background-color:lightgray;
+  border: solid 5px black;
+  color:black;
+}
+
+.cta img {
+  max-width: 40%;
+  border: solid 5px black;
+  height: auto;
+  border-radius: 8px;
+}
+
+.cta__text-column {
+  padding-left: 20px;
+}
+
+.cta__text-column h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style pour le paragraphe p à l'intérieur de cta */
+.cta__text-column p {
+  font-size: 16px;
+  line-height: 1.5;
+}

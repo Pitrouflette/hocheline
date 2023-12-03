@@ -34,12 +34,10 @@ io.on('connection', (socket) => {
 
   onlineCount++;
 
-  io.emit('online count', onlineCount);
   io.emit('display post', postVar);
 
   socket.on('disconnect', () => {
     onlineCount--;
-    io.emit('online count', onlineCount);
   });
 
   socket.on('getIP', () => {
@@ -51,6 +49,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('register post', (innerHTML) => {
+
+    console.log("post registering...");
 
     fs.readFile(filePath, 'utf8', (err, data) => {
       let jsonData = {};
@@ -88,6 +88,7 @@ io.on('connection', (socket) => {
           console.log('Nouvel élément ajouté avec succès au fichier JSON.');
       });
       postVar = creerListeDepuisObjet(jsonData.elements);
+      console.log("post registered !");
       io.emit("display post", postVar);
     });
   });

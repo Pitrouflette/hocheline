@@ -1,50 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Hocheline</title>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Hocheline</title>
 </head>
 <body>
-  <div id="container">
-    <div id="message-container"></div>
-    <input type="text" id="user-message" placeholder="envoyer un message">
-    <button id="send-btn">→</button>
-    <span id="online-count">🔴</span>
-    <h1 id="romor-title">Bienvenue [username] !</h1>
+    <header>
+        <div class="header">
+            <h1 id="title">Hocheline - Username</h1>
+            <nav>
+                <a href="index.html">acceuil</a>
+                <a href="chat.html">chat</a>
+                <a href="post.html">post</a>
+                <a href="poster.html">poster</a>
+                <a href="#" id="deco">se déconnecter</a>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="top-left">
+            <h2>Hocheline ?</h2>
+            <p>
+                Bienvenue sur Hocheline, le réseau social conçu sur mesure pour les élèves de la cité scolaire Hoche ! Hocheline offre une plateforme interactive qui combine un chat en direct et un système de publication, créant ainsi un espace virtuel vibrant et engageant où les membres peuvent interagir, partager et se connecter. C'est un espace conçu pour renforcer les liens au sein de la communauté, faciliter la collaboration éducative, et célébrer les moments uniques qui font du lycée une expérience inoubliable.
+            </p>
+        </div>
+        <div class="bottom-left">
+            <h2>Conditions d'utilisation</h2>
+            <p>
+                <p>En utilisant Hocheline, le réseau social dédié au Lycée Hoche de Versailles, vous acceptez les conditions suivantes, élaborées dans le but de créer une communauté en ligne positive, sécurisée et enrichissante pour tous les membres :</p>
 
-    <div id="rumor-container">
+                <h3>1. Eligibilité :</h3>
+                <p> Hocheline est exclusivement destiné aux élèves, enseignants et membres du personnel du Lycée Hoche de Versailles. L'accès est limité aux personnes ayant une affiliation active avec l'établissement.</p>
+               
+
+                <h3>2. Respect et Civilité :</h3>
+                <p>Les utilisateurs sont tenus de respecter les opinions, croyances et points de vue des autres membres. Les commentaires ou publications offensants, diffamatoires, discriminatoires ou irrespectueux ne seront pas tolérés.</p>
+
+                <h3>3. Confidentialité et Sécurité :</h3>
+                <p>La confidentialité des membres est une priorité. Évitez de partager des informations personnelles sensibles, telles que les adresses, numéros de téléphone ou informations bancaires.
+                Signalez immédiatement tout comportement suspect ou toute violation de la sécurité.</p>
+                <h5>/!\ Ce site web n'a pas un sécurité infaible, veuillez à utiliser un mot de passe unique à ce site !</h5>
+                
+
+                <h3>4. Contenu Approprié :</h3>
+                <p>Les publications doivent respecter les normes de décence, éviter le contenu explicite, obscène ou illégal. Tout contenu susceptible de perturber le bon fonctionnement de la communauté sera supprimé.</p>
+                
+                <h3>5. Utilisation Responsable :</h3>
+                <p>Les membres s'engagent à utiliser Hocheline de manière responsable, en évitant toute activité pouvant nuire à la réputation du Lycée Hoche ou de ses membres.</p>
+
+                <h3>6. Propriété Intellectuelle :</h3>
+                <p>Le contenu publié sur Hocheline doit respecter les droits d'auteur et autres droits de propriété intellectuelle. Les utilisateurs sont responsables du contenu qu'ils partagent.</p>
+
+                <h3>7. Modération et Sanctions :</h3>
+                <p></p>L'équipe de modération veillera au respect des conditions d'utilisation. Les violations peuvent entraîner des avertissements, des suspensions temporaires ou la désactivation définitive du compte, selon la gravité de l'infraction.
+
+                <h3>8. Modifications des Conditions :</h3>
+                <p>Hocheline se réserve le droit de mettre à jour ou de modifier les conditions d'utilisation. Les utilisateurs seront informés des changements significatifs. En utilisant Hocheline, vous vous engagez à respecter ces conditions d'utilisation. Tout manquement peut entraîner des mesures appropriées, y compris la résiliation du compte. Nous vous encourageons à contribuer positivement à la création d'une communauté virtuelle exemplaire au sein du Lycée Hoche de Versailles.</p>
+            </p>
+        </div>
+        <div class="right">
+            <h1>Fonctionnalités et caractéristiques principales :</h1>
+            <h3>Chat en Direct :</h3>
+            <p>Hocheline favorise la communication instantanée au sein de la communauté. Que ce soit pour discuter de devoirs, partager des idées passionnantes, ou simplement échanger des nouvelles, le chat en direct permet aux utilisateurs de rester connectés en temps réel.</p>
+            <h3>Système de Publication :</h3>
+            <p>Exprimez-vous et partagez vos pensées, photos, et expériences à travers le système de publication intuitif. Que ce soit pour publier des annonces importantes, des projets créatifs, ou des moments mémorables, Hocheline offre une plateforme pour mettre en avant la diversité et la richesse de la vie lycéenne.</p>
+            <h3>Communauté Scolaire :</h3>
+            <p>Hocheline est exclusivement dédié à la communauté du Lycée Hoche, créant ainsi un espace sûr et familial où les élèves, les enseignants, et le personnel peuvent interagir de manière transparente et enrichissante.</p>
+        </div>
     </div>
-  </div>
-
-  <div id="cta-form">
-    <h1 class="post-header">Poster un elément :</h1>
-    <form action="" class="forme">
-      
-      <input type="text" required class="form__input" id="title" />
-      <label for="title" class="form__label">Titre</label>
-
-      <input type="text" required class="form__input" id="description" />
-      <label for="description" class="form__label">Texte</label>
-
-      <input type="file" required class="form__input" id="image" />
-      <label for="image" class="form__label">Image</label>
-
-      <button class="submit">Poster</button>
-      
-    </form>
-  </div>
-
-  <div class="footer">
-
-  </div>
-
-  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-  <script src="js/chat.js"></script>
-  <script src="js/post.js"></script>
-  <script src="js/protected_pages.js"></script>
+    <div class="footer">
+        © 2021 Hocheline - crée par des élèves du Lycée Hoche
+    </div>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="js/protected-page.js"></script>
 </body>
 </html>
