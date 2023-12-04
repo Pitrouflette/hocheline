@@ -1,5 +1,5 @@
 const greetHeader = document.getElementById('title');
-const disconect = document.getElementById('deco');
+
 
 if (localStorage.getItem('isLoggedIn') == "false") {
     
@@ -12,9 +12,3 @@ if (localStorage.getItem('isLoggedIn') == "false") {
     } 
 }
 
-disconect.addEventListener('click', function(event){
-    console.log("clicked");
-    localStorage.setItem('isLoggedIn', "false");
-    localStorage.setItem('username', "Username");
-    window.location.href = 'login.html';
-});

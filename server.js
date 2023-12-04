@@ -105,6 +105,7 @@ io.on('connection', (socket) => {
         console.log("Identifiants valides. L'utilisateur " + username + " existe dans la base de données.");
         const data = {
           username: username,
+          password: password,
           url: "http://82.121.132.29:3000/"
         };
         socket.emit('redirect', data);
@@ -120,6 +121,12 @@ io.on('connection', (socket) => {
     sql = 'INSERT INTO users (username, password, email) VALUES (?, ?, ?)';
     loginDB.run(sql, [username, password, email], (err) => {
       console.log(username, password, email);
+      const data = {
+        username: username,
+        password: password,
+        url: "http://82.121.132.29:3000/"
+      };
+      socket.emit('redirect', data);
       if (err) {
         console.error(err.message);
         return;
@@ -142,6 +149,28 @@ io.on('connection', (socket) => {
         messageData.message = messageData.username + " >>> " + messageData.message;
         socket.emit("display message checked", messageData);
       }
+    });
+  });
+  socket.on("getUserData", (username) => {
+    sql = "SELECT email, password, admin FROM users WHERE username = ?";
+    loginDB.get(sql, [username], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      if (row) {
+        socket.emit("fill edit form", row);
+      }
+    });
+  });
+  socket.on("edit profil", (data) => {
+    sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE username = ?";
+    loginDB.run(sql, [data.username, data.email, data.password, data.old_username], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      socket.emit("profil edited", data);
     });
   });
 });

@@ -11,7 +11,7 @@ socket.on('display message', (msgNom) => {
 socket.on("display message checked", (messageData) => {
   const messageElement = document.createElement('div');
   messageElement.classList.add('message');
-  messageElement.classList.add(messageData.check === "admin" ? "admin2-message" : "");
+  messageElement.classList.add(messageData.check === "admin" ? "admin2-message" : "server-message");
   messageElement.textContent = messageData.message;
   messageContainer.appendChild(messageElement);
   messageContainer.scrollTop = messageContainer.scrollHeight;
