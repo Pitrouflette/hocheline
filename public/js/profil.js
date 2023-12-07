@@ -3,6 +3,7 @@ const username = document.getElementById('username-input');
 const email = document.getElementById('email-input');
 const password = document.getElementById('password-input');
 const submit = document.getElementById('submit');
+const delete_profil = document.getElementById('delete');
 const socket = io();
 
 socket.emit("getUserData", localStorage.getItem("username"));
@@ -25,6 +26,15 @@ socket.on("profil edited", (data) => {
     window.location.reload();
 });
 
+socket.on("profil deleted", (username) => {
+    localStorage.setItem('username', "");
+    localStorage.setItem('password', "");
+    localStorage.setItem('email', "");
+    localStorage.setItem('isLoggedIn', "false");
+    window.location.reload();
+});
+
+
 submit.addEventListener('click', function(event){
     if(localStorage.getItem("username") == username.value || localStorage.getItem("password") == password.value || localStorage.getItem("email") == email.value){
         const data = {
@@ -34,6 +44,12 @@ submit.addEventListener('click', function(event){
             email: email.value,
           };
         socket.emit("edit profil", data);
+    }
+});
+
+delete_profil.addEventListener('click', function(event){
+    if (window.confirm("Are you sure you want to delete your account ?")){
+        socket.emit("delete profil", localStorage.getItem('username'));
     }
 });
 

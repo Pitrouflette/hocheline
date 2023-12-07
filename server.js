@@ -50,8 +50,6 @@ io.on('connection', (socket) => {
 
   socket.on('register post', (innerHTML) => {
 
-    console.log("post registering...");
-
     fs.readFile(filePath, 'utf8', (err, data) => {
       let jsonData = {};
   
@@ -73,10 +71,13 @@ io.on('connection', (socket) => {
       if (!jsonData.elements) {
           jsonData.elements = [];
       }
+        
+      if(innerHTML){
+        jsonData.elements.push({
+          innerHTML: innerHTML
+        });
+      }
       
-      jsonData.elements.push({
-        innerHTML: innerHTML
-      });
       
       const updatedJsonContent = JSON.stringify(jsonData, null, 2);
   
@@ -85,10 +86,8 @@ io.on('connection', (socket) => {
               console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
               return;
           }
-          console.log('Nouvel élément ajouté avec succès au fichier JSON.');
       });
       postVar = creerListeDepuisObjet(jsonData.elements);
-      console.log("post registered !");
       io.emit("display post", postVar);
     });
   });
@@ -163,6 +162,26 @@ io.on('connection', (socket) => {
       }
     });
   });
+  socket.on("getUserEmail", (data1) => {
+    console.log(data1);
+    sql = "SELECT email, admin FROM users WHERE username = ?";
+    loginDB.get(sql, [data1.username], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      if (row) {
+        console.log("okk");
+        const data = {
+          email: row.email,
+          event: data1.event,
+          admin: row.admin,
+          username: data1.username
+        };
+        socket.emit("popup info", data);
+      }
+    });
+  });
   socket.on("edit profil", (data) => {
     sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE username = ?";
     loginDB.run(sql, [data.username, data.email, data.password, data.old_username], (err, row) => {
@@ -173,6 +192,16 @@ io.on('connection', (socket) => {
       socket.emit("profil edited", data);
     });
   });
+  socket.on("delete profil", (username) => {
+    sql = "DELETE FROM users WHERE username = ?";
+    loginDB.run(sql, [username], (err, row) => {
+       if (err) {
+         console.error(err.message);
+         return;
+       }
+       socket.emit("profil deleted", username);
+    });
+   });
 });
 
 function creerListeDepuisObjet(obj) {

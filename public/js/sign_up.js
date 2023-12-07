@@ -14,6 +14,10 @@ submit.addEventListener('click', () => {
 
     socket.emit("sign up", userData);
     socket.emit("login", username, password);
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+    localStorage.setItem("email", email);
     window.location.href = 'index.html';
 
     document.getElementById("username").value = "";

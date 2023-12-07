@@ -34,8 +34,9 @@ submit.addEventListener('click', () => {
   var textColumn = document.createElement('div');
   textColumn.classList.add('cta__text-column');
   var h2 = document.createElement('h2');
+  h2.classList.add("h2__popup")
   if (titleValue) {
-    h2.textContent = titleValue;
+    h2.textContent = localStorage.getItem("username") + " >>> " + titleValue;
   }
   var p = document.createElement('p');
   if (descriptionValue) {
@@ -58,4 +59,5 @@ submit.addEventListener('click', () => {
   imageInput.value = "";
 
   window.location.reload();
+  window.location.href = "post.html";
 });
