@@ -10,6 +10,7 @@ body{
     align-items: center;
     min-height: 100vh;
     background-color: white;
+    color: black;
 }
 
 /*BOX*/
@@ -81,19 +82,20 @@ body{
     background: transparent;
     border: none;
     outline: none;
-    color: white;
+    color: black;
     font-size: 1.5em;
     letter-spacing: 0.05em;
     z-index: 10;
 }
-.inputBox span{ position: absolute;
-left: 0;
-padding: 30px 0px 10px;
-font-size: 1em;
-color: white;
-pointer-events: none;
-letter-spacing: 0.05em;
-transition: 0.5s;
+.inputBox span{ 
+    position: absolute;
+    left: 0;
+    padding: 30px 0px 10px;
+    font-size: 1em;
+    color: black;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
 }
 .inputBox input:valid ~ span,
 .inputBox input:focus ~ span{

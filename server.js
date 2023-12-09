@@ -256,5 +256,5 @@ app.listen(port, () => {
 });
 
 http.listen(port, '0.0.0.0', () => {
-  console.log(`Serveur est bien démarré sur le port ${port}`);
+  console.log(`Serveur bien démarré sur le port ${port}`);
 });

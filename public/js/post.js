@@ -54,7 +54,7 @@ function createPopupPost(username, event, email, admin) {
     content.innerHTML = `
     <p>Username: ${username}</p>
     <p>Email: ${email}</p>
-    <p>infos supplémentaires: Cet utilisateur est administrateur</p>
+    <p>Infos supplémentaires: Cet utilisateur est administrateur</p>
   `;
   }
   
