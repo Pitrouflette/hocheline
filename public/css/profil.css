@@ -21,6 +21,7 @@ div.footer{
     padding: 1rem;
     margin-top: 3rem;
     border: solid 5px;
+    color: #046b90;
     display: flex;
     justify-content: center;
 }
@@ -33,6 +34,7 @@ div.footer{
     margin: 1rem; 
     padding: 1rem;
     border: solid 5px; 
+    color: #046b90;
 }
 div.container::-webkit-scrollbar{
     width: 0px;
@@ -45,8 +47,9 @@ input[type="text"], textarea, input[type="file"] {
     width: 98%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #046b90;
     border-radius: 3px;
+    background-color: #00212b;
     resize: none;
 }
 input[type="file"] {
@@ -55,21 +58,22 @@ input[type="file"] {
 button.btn {
     width: 100%;
     padding: 10px;
-    background-color: #333;
-    color: #fff;
+    background-color: #046b90;
+    color: #00212b;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 button.btn:hover {
-    background-color: #555;
+    background-color: #00213b;
+    color: #046b90;
 }
 
 button.delete {
     width: 100%;
     padding: 10px;
     margin-top: 1rem;
-    background-color: white;
+    background-color: #00212b;
     color: red;
     border: solide 2px;
     border-color: red;
