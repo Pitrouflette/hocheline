@@ -101,15 +101,12 @@ io.on('connection', (socket) => {
         return;
       }
       if (row) {
-        console.log("Identifiants valides. L'utilisateur " + username + " existe dans la base de données.");
         const data = {
           username: username,
           password: password,
           url: "http://82.121.132.29:3000/"
         };
         socket.emit('redirect', data);
-      } else {
-        console.log("Identifiants invalides. L'utilisateur n'existe pas ou le mot de passe est incorrect.");
       }
     });
   });
@@ -163,21 +160,21 @@ io.on('connection', (socket) => {
     });
   });
   socket.on("getUserEmail", (data1) => {
-    console.log(data1);
-    sql = "SELECT email, admin FROM users WHERE username = ?";
+    sql = "SELECT email, admin, password FROM users WHERE username = ?";
     loginDB.get(sql, [data1.username], (err, row) => {
       if (err) {
         console.error(err.message);
         return;
       }
       if (row) {
-        console.log("okk");
         const data = {
           email: row.email,
           event: data1.event,
           admin: row.admin,
-          username: data1.username
+          username: data1.username,
+          password: row.password
         };
+        console.log(data);
         socket.emit("popup info", data);
       }
     });

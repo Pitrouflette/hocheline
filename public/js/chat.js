@@ -43,6 +43,7 @@ messageInput.addEventListener('keydown', (event) => {
 
 messageContainer.addEventListener('click', function (event) {
   const clickedElement = event.target.closest('.h2__popup');
+  console.log("clicked");
 
   if (clickedElement && clickedElement.innerText !== "élèves") {
     console.log(clickedElement.innerText.split(" ")[0]);
@@ -50,11 +51,11 @@ messageContainer.addEventListener('click', function (event) {
       username: clickedElement.innerText.split(" ")[0],
       event: event
     };
-    socks.emit("getUserEmail", (data1));
+    socket.emit("getUserEmail", (data1));
   }
 });
 
-socks.on("popup info", (data) => {
+socket.on("popup info", (data) => {
   console.log(data.username, data.event, data.email, data.admin);
   createPopupPost(data.username, data.event, data.email, data.admin);
 });
@@ -93,7 +94,7 @@ function createPopupPost(username, event, email, admin) {
   popupContainer.addEventListener('mousedown', function (mousedownEvent) {
     isDragging = true;
 
-    offsetX = mousedownEvent.clientX - popupContainer.getBoundingClientRect().left - 150;
+    offsetX = mousedownEvent.clientX - popupContainer.getBoundingClientRect().left - 200;
     offsetY = mousedownEvent.clientY - popupContainer.getBoundingClientRect().top - 80;
 
     document.body.style.userSelect = 'none';

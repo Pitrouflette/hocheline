@@ -67,7 +67,7 @@ function createPopupPost(username, event, email, admin) {
   popupContainer.addEventListener('mousedown', function (mousedownEvent) {
     isDragging = true;
 
-    offsetX = mousedownEvent.clientX - popupContainer.getBoundingClientRect().left - 150;
+    offsetX = mousedownEvent.clientX - popupContainer.getBoundingClientRect().left - 200;
     offsetY = mousedownEvent.clientY - popupContainer.getBoundingClientRect().top - 80;
 
     document.body.style.userSelect = 'none';
