@@ -1,10 +1,10 @@
 body{
-    background-color: white;
+    background-color: #00212b;
 }
 div.header {
-    border-color: black;
+    border-color: #046b90;
     text-decoration: none;
-    color: black;
+    color: #046b90;
     border: solid 5px;
     display: flex;
     justify-content: space-between;
@@ -97,7 +97,7 @@ a.h2__popup{
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border: solid 2px;
-  border-color: black;
+  border-color: #046b90;
 }
 
 /* Styles for popup's close button */

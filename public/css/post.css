@@ -1,10 +1,10 @@
 body{
-  background-color: white;
+  background-color: #00212b;
 }
 div.header {
-  border-color: black;
+  border-color: #046b90;
   text-decoration: none;
-  color: black;
+  color: #046b90;
   border: solid 5px;
   display: flex;
   justify-content: space-between;
@@ -30,6 +30,7 @@ div.container{
   height: fit-content;
   max-height: 100%;
   border: solid 5px;
+  border-color: #046b90;
   overflow-y: scroll;
 }
 div.container::-webkit-scrollbar{
@@ -42,9 +43,9 @@ div.container::-webkit-scrollbar{
   display: flex;
   border-radius: 25px;
   padding: 20px;
-  background-color:lightgray;
-  border: solid 5px black;
-  color:black;
+  background-color: #00212b;
+  border: solid 5px #046b90;
+  color:#046b90;
 }
 
 .cta img {
