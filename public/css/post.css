@@ -21,6 +21,7 @@ div.footer{
   padding: 1rem;
   margin-top: 3rem;
   border: solid 5px;
+  color: #046b90;
   display: flex;
   justify-content: center;
 }

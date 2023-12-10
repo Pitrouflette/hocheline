@@ -51,6 +51,7 @@ input[type="text"], textarea, input[type="file"] {
     border-radius: 3px;
     background-color: #00212b;
     resize: none;
+    color: #046b90;
 }
 input[type="file"] {
     margin-bottom: 20px;
