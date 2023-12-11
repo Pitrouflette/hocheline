@@ -2,6 +2,9 @@ body{
     background-color: #00212b;
     font-family: Arial, sans-serif;
 }
+#title{
+    margin-left: 1rem;
+}
 div.header {
     border-color: #046b90;
     text-decoration: none;
