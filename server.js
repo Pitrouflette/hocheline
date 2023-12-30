@@ -55,16 +55,16 @@ io.on('connection', (socket) => {
   
       if (err) {
           if (err.code !== 'ENOENT') {
-              console.error('Erreur lors de la lecture du fichier JSON :', err);
-              return;
+            console.error('Erreur lors de la lecture du fichier JSON :', err);
+            return;
           }
       } else {
           if (data.trim() !== '') {
               try {
-                  jsonData = JSON.parse(data);
+                jsonData = JSON.parse(data);
               } catch (jsonErr) {
-                  console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
-                  return;
+                console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
+                return;
               }
           }
       }
@@ -78,13 +78,12 @@ io.on('connection', (socket) => {
         });
       }
       
-      
       const updatedJsonContent = JSON.stringify(jsonData, null, 2);
   
       fs.writeFile(filePath, updatedJsonContent, 'utf8', (writeErr) => {
           if (writeErr) {
-              console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
-              return;
+            console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
+            return;
           }
       });
       postVar = creerListeDepuisObjet(jsonData.elements);
