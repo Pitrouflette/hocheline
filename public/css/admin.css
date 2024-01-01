@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  #admin-panel {
+    width: 100%;
+    height: 100vh;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #admin-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  #stats-container {
+    display:flex;
+    margin: 10px;
+  }
+
+  .stat-box {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+.container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.db_container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#db{
+    font-size: larger;
+}
+
+.even-row {
+    background-color: #333; /* Couleur de fond pour les lignes paires */
+    color: #f4f4f4;
+}
+
+.odd-row {
+  background-color: #ffffff; /* Couleur de fond pour les lignes impaires */
+}

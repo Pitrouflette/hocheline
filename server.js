@@ -13,6 +13,9 @@ const filePath = 'public/posts/post.json';
 app.use(express.static('public'));
 
 let onlineCount = 0;
+let visitCount = 0;
+let messageCount = 0;
+let postCount = 0;
 let sql;
 
 var postVar = "";
@@ -33,6 +36,7 @@ io.on('connection', (socket) => {
   const clientIp = socket.handshake.address; 
 
   onlineCount++;
+  visitCount++;
 
   io.emit('display post', postVar);
 
@@ -45,6 +49,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat message', (msgNom) => {
+    messageCount++;
     io.emit("display message", msgNom);
   });
 
@@ -89,6 +94,20 @@ io.on('connection', (socket) => {
       postVar = creerListeDepuisObjet(jsonData.elements);
       io.emit("display post", postVar);
     });
+  });
+
+  socket.on("postIncreas", () =>{
+    postCount++;
+  });
+
+  socket.on("admin data", () => {
+    let data = {
+      onlines: onlineCount,
+      visiters: visitCount,
+      messages: messageCount,
+      posts: postCount
+    };
+    socket.emit("admin", data);
   });
 
   // DATABASE HANDLER
@@ -155,6 +174,7 @@ io.on('connection', (socket) => {
       }
       if (row) {
         socket.emit("fill edit form", row);
+        socket.emit("sendData", row);
       }
     });
   });
@@ -198,6 +218,17 @@ io.on('connection', (socket) => {
        socket.emit("profil deleted", username);
     });
    });
+  socket.on("getDB", () => {
+   const sql = 'SELECT * FROM users';
+   loginDB.all(sql, [], (err, rows) => {
+     if (err) {
+       console.error(err.message);
+       return;
+     }
+     // Envoyez les données au client
+     socket.emit('recive DB', rows);
+   });
+  });
 });
 
 function creerListeDepuisObjet(obj) {

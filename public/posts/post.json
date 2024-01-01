@@ -1,10 +1,19 @@
 {
   "elements": [
     {
-      "innerHTML": "<img src=\"../images/Hocheline template.png\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\">Pitrouflette &gt;&gt;&gt; s</h2><p>s</p></div>"
+      "innerHTML": "<img src=\"../images/1111111111.jfif\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\">Pitrouflette &gt;&gt;&gt; Hey les gens !</h2><p>ca va ou quoi?</p></div>"
     },
     {
-      "innerHTML": "<img src=\"../images/intellij-idea.ico\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\"></h2><p></p></div>"
+      "innerHTML": "<img src=\"../images/ariamabanner.png\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\">Pitrouflette &gt;&gt;&gt; sddsfS</h2><p>sdfsfd</p></div>"
+    },
+    {
+      "innerHTML": "<img src=\"../images/BgMc1.png\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\">Pitrouflette &gt;&gt;&gt; qsd</h2><p>qsd</p></div>"
+    },
+    {
+      "innerHTML": "<img src=\"../images/ariamabanner.png\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\">Pitrouflette &gt;&gt;&gt; qsdqsd</h2><p>qsdqsd</p></div>"
+    },
+    {
+      "innerHTML": "<img src=\"../images/baseu.png\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\">Pitrouflette &gt;&gt;&gt; hey !</h2><p>ca va les gens ?</p></div>"
     }
   ]
 }

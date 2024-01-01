@@ -82,7 +82,7 @@ body{
     background: transparent;
     border: none;
     outline: none;
-    color: #046b90;
+    color: #00212b;
     font-size: 1.5em;
     letter-spacing: 0.05em;
     z-index: 10;
@@ -98,7 +98,6 @@ transition: 0.5s;
 }
 .inputBox input:valid ~ span,
 .inputBox input:focus ~ span{
-    color: #00212b;
     transform: translate(0px) translateY(-50px);
     font-size: 0.9em;
 }

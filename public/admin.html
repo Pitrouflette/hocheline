@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Bord - Statistiques</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div id="admin-panel">
+    <div id="admin-header">Tableau de Bord - Statistiques</div>
+    <div class="container">
+        <div id="stats-container">
+            <div class="stat-box">
+                <h2>Utilisateurs en ligne</h2>
+                <p id="online-users">0</p>
+            </div>
+            <div class="stat-box">
+                <h2>Nombre de visites</h2>
+                <p id="total-visits">0</p>
+            </div>
+            <div class="stat-box">
+                <h2>Nombre de publications</h2>
+                <p id="total-post">0</p>
+            </div>
+            <div class="stat-box">
+                <h2>Nombre de messages</h2>
+                <p id="total-message">0</p>
+            </div>
+            <div class="stat-box">
+                <h2>Nombre de comptes</h2>
+                <p id="total-account">0</p>
+            </div>
+        </div>
+    </div>
+    <div class="db_container">
+        <h2>Base de données</h2>
+    </div>
+    
+    <div class="db_container">
+        <div id="db">
+            
+        </div>
+    </div>
+    
+  </div>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/protected-page.js"></script>
+</body>
+</html>

@@ -16,6 +16,7 @@ socks.on("display post", (postList) => {
 });
 
 container.addEventListener('click', function (event) {
+  socks.emit("postIncreas", "");
   const clickedElement = event.target.closest('.h2__popup');
 
   if (clickedElement && clickedElement.innerText !== "élèves") {
