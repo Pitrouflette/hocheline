@@ -66,7 +66,7 @@ function createPopupPost(username, event, email, admin) {
 
   const closeButton = document.createElement('span');
   closeButton.classList.add('close');
-  closeButton.innerHTML = '&times;'; // '×' symbol for close
+  closeButton.innerHTML = '&times;';
   closeButton.addEventListener('click', function () {
     document.body.removeChild(popupContainer);
   });
