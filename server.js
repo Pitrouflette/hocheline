@@ -24,7 +24,7 @@ const loginDB = new sqlite3.Database('public/db/users.db', sqlite3.OPEN_READWRIT
   if(err) return console.error(err.message);
 });
 
-sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin)';
+sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin,friends)';
 loginDB.run(sql);
 
 app.get('/', (req, res) => {
@@ -125,6 +125,46 @@ io.on('connection', (socket) => {
           url: "http://82.121.132.29:3000/"
         };
         socket.emit('redirect', data);
+      }
+    });
+  });
+  socket.on("add friend", (data) => {
+    const username = data.sender;
+    const id = data.id;
+    const newFriend = data.friend;
+
+    const sqlSelect = "SELECT friend FROM users WHERE username = ?";
+    loginDB.get(sqlSelect, [username], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      if (row) {
+        const currentFriends = row.friend ? row.friend.split(",") : [];
+  
+        if (currentFriends.includes(newFriend)) {
+          io.to(id).emit("friend already added", newFriend);
+        } else {
+          currentFriends.push(newFriend);
+  
+          const updatedFriends = currentFriends.join(",");
+          const sqlUpdate = "UPDATE users SET friend = ? WHERE username = ?";
+  
+          loginDB.run(sqlUpdate, [updatedFriends, username], function (err) {
+            if (err) {
+              console.error(err.message);
+              return;
+            }
+
+            if (this.changes > 0) {
+              io.to(id).emit("friend added", {newFriend});
+            } else {
+              io.to(id).emit("update failed");
+            }
+          });
+        }
+      } else {
+        io.to(id).emit("wrong name", newFriend);
       }
     });
   });

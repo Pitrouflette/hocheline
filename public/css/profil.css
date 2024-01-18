@@ -40,6 +40,39 @@ div.footer{
     border: solid 5px; 
     color: #046b90;
 }
+
+div.send-message{
+    border: solid 3px;
+    border-color: #046b90;
+    padding: 1rem;
+    margin-top: 0.3rem;
+    max-height: 1.7rem;
+    display: flex;
+    justify-content: space-between;
+}
+div.send-message input{
+    background-color: #00212b;
+    color: #046b90;
+    border: none !important;
+    width: 100%;
+    height: 1rem;
+}
+div.send-message input:focus{
+    outline: none;
+}
+div.send-message button{
+    height: 2rem;
+    width: 6rem;
+    border: solid 2px #00212b !important;
+    background-color: #046b90;
+}
+div.send-message button:hover{
+    cursor: pointer;
+    color: #046b90;
+    background-color: #00213b;
+
+}
+
 div.container::-webkit-scrollbar{
     width: 0px;
 }

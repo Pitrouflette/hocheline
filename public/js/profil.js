@@ -4,6 +4,8 @@ const email = document.getElementById('email-input');
 const password = document.getElementById('password-input');
 const submit = document.getElementById('submit');
 const delete_profil = document.getElementById('delete');
+const friend_button = document.getElementById('add-friend');
+const friend_name = document.getElementById('name-friend');
 const socket = io();
 
 socket.emit("getUserData", localStorage.getItem("username"));
@@ -45,6 +47,15 @@ submit.addEventListener('click', function(event){
           };
         socket.emit("edit profil", data);
     }
+});
+
+friend_button.addEventListener('click', function(event){
+    let data = {
+        'friend': friend_name.value,
+        'sender': localStorage.getItem('username'),
+        'id': socket.id
+    }
+    socket.emit('add friend', (data));
 });
 
 delete_profil.addEventListener('click', function(event){
