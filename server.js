@@ -133,22 +133,28 @@ io.on('connection', (socket) => {
     const id = data.id;
     const newFriend = data.friend;
 
-    const sqlSelect = "SELECT friend FROM users WHERE username = ?";
+    const sqlSelect = "SELECT friends FROM users WHERE username = ?";
     loginDB.get(sqlSelect, [username], (err, row) => {
       if (err) {
         console.error(err.message);
         return;
       }
       if (row) {
-        const currentFriends = row.friend ? row.friend.split(",") : [];
+        let currentFriends = "initial state";
+        if (row.friends.includes(",")){
+          currentFriends = row.friends.split(",");
+        }else{
+          currentFriends = row.friends;
+        }
+        
+        console.log(currentFriends);
   
         if (currentFriends.includes(newFriend)) {
           io.to(id).emit("friend already added", newFriend);
         } else {
-          currentFriends.push(newFriend);
   
-          const updatedFriends = currentFriends.join(",");
-          const sqlUpdate = "UPDATE users SET friend = ? WHERE username = ?";
+          const updatedFriends = currentFriends + "," + newFriend;
+          const sqlUpdate = "UPDATE users SET friends = ? WHERE username = ?";
   
           loginDB.run(sqlUpdate, [updatedFriends, username], function (err) {
             if (err) {
@@ -157,9 +163,23 @@ io.on('connection', (socket) => {
             }
 
             if (this.changes > 0) {
-              io.to(id).emit("friend added", {newFriend});
+              const sqlSelect2 = "SELECT friends FROM users WHERE username = ?";
+              loginDB.get(sqlSelect2, [newFriend], (err, row) => {
+                if (err) {
+                  console.error(err.message);
+                  return;
+                }if(row){
+                  if(row.friends.includes(username)) {
+                    io.to(id).emit("friend added", newFriend);
+                  }else{
+                    io.to(id).emit("friend added waiting", newFriend);
+                  }
+                }else{
+                  io.to(id).emit("wrong name", newFriend);
+                }
+              });
             } else {
-              io.to(id).emit("update failed");
+              io.to(id).emit("update failed", newFriend);
             }
           });
         }
@@ -178,7 +198,7 @@ io.on('connection', (socket) => {
       const data = {
         username: username,
         password: password,
-        url: "http://82.121.132.29:3000/"
+        url: "http://192.168.1.35:3000/"
       };
       socket.emit('redirect', data);
       if (err) {
@@ -206,7 +226,7 @@ io.on('connection', (socket) => {
     });
   });
   socket.on("getUserData", (username) => {
-    sql = "SELECT email, password, admin FROM users WHERE username = ?";
+    sql = "SELECT email, password, admin, friends FROM users WHERE username = ?";
     loginDB.get(sql, [username], (err, row) => {
       if (err) {
         console.error(err.message);
@@ -231,7 +251,7 @@ io.on('connection', (socket) => {
           event: data1.event,
           admin: row.admin,
           username: data1.username,
-          password: row.password
+          password: row.password,
         };
         console.log(data);
         socket.emit("popup info", data);

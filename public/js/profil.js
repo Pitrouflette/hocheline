@@ -6,14 +6,26 @@ const submit = document.getElementById('submit');
 const delete_profil = document.getElementById('delete');
 const friend_button = document.getElementById('add-friend');
 const friend_name = document.getElementById('name-friend');
+const friend_list = document.getElementById('freind-list');
+const friend_messagable = document.getElementsByClassName('messagable');
 const socket = io();
 
 socket.emit("getUserData", localStorage.getItem("username"));
+
+for (element in friend_messagable) {
+    console.log(friend_messagable[0]);
+    friend_messagable.addEventListener('click', function() {
+        openChatWindow(friend_messagable[element]);
+    });
+}
 
 socket.on("fill edit form", (row) => {
     username.value = localStorage.getItem('username');
     email.value = row.email;
     password.value = row.password;
+    for (friend in row.friends.split(",")){
+        friend_list.innerHTML += `<p class="messagable"> • ${row.friends.split(",")[friend]}</p>`;
+    }
     localStorage.setItem('password', row.password);
     localStorage.setItem('email', row.email);
 });
@@ -36,6 +48,27 @@ socket.on("profil deleted", (username) => {
     window.location.reload();
 });
 
+// FRIEND MANAGEMENT
+
+socket.on('wrong name', (friend) =>{
+    afficherNotification("l'utilisateur " +  friend + "  n'existe pas !");
+});
+socket.on('update failed', (friend) =>{
+    afficherNotification("Impossible d'ajouter " +  friend + " comme ami(e)...");
+});
+socket.on('friend added', (friend) =>{
+    afficherNotification("Vous êtes maintenant ami(e) avec " +  friend + " !!");
+    socket.emit("getUserData", localStorage.getItem("username"));
+});
+socket.on('friend already added', (friend) =>{
+    afficherNotification("Vous êtes déjà ami(e) avec " +  friend + " !!");
+});
+socket.on('friend added waiting', (friend) =>{
+    afficherNotification("Vous avez ajouter " +  friend + " comme ami(e), pour pouvoir communiquer avec lui, il faut qu'il vous ajoute a son tour !");
+});
+
+
+
 
 submit.addEventListener('click', function(event){
     if(localStorage.getItem("username") == username.value || localStorage.getItem("password") == password.value || localStorage.getItem("email") == email.value){
@@ -55,6 +88,7 @@ friend_button.addEventListener('click', function(event){
         'sender': localStorage.getItem('username'),
         'id': socket.id
     }
+    friend_name.value = "";
     socket.emit('add friend', (data));
 });
 
@@ -69,3 +103,83 @@ disconect.addEventListener('click', function(event){
     localStorage.setItem('username', "Username");
     window.location.href = 'login.html';
 });
+
+function openChatWindow(element) {
+    var chatWindow = document.createElement("div");
+    chatWindow.id = "chat-window";
+    var chatHeader = document.createElement("div");
+    chatHeader.id = "chat-header";
+    chatHeader.textContent = "Fenêtre de Chat";
+    var chatBody = document.createElement("div");
+    chatBody.id = "chat-body";
+    var chatInput = document.createElement("input");
+    chatInput.type = "text";
+    chatInput.id = "chat-input";
+    chatInput.placeholder = "Tapez votre message...";
+    var chatSendButton = document.createElement("button");
+    chatSendButton.id = "chat-send";
+    chatSendButton.textContent = "Envoyer";
+    chatSendButton.onclick = envoyerMessage;
+    chatWindow.appendChild(chatHeader);
+    chatWindow.appendChild(chatBody);
+    chatWindow.appendChild(chatInput);
+    chatWindow.appendChild(chatSendButton);
+    document.body.appendChild(chatWindow);
+
+    dragElement(document.getElementById("chat-window"));
+
+  function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "-header")) {
+      document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
+    } else {
+      elmnt.onmousedown = dragMouseDown;
+    }
+
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+};
+
+function afficherNotification(message) {
+
+    var notification = document.createElement('div');
+    notification.innerHTML = message;
+    notification.style.backgroundColor = 'orange';
+    notification.style.padding = '10px';
+    notification.style.position = 'fixed';
+    notification.style.top = '10px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.borderRadius = '5px';
+    notification.style.color = 'white';
+    notification.style.zIndex = '9999';
+  
+    document.body.appendChild(notification);
+
+    setTimeout(function() {
+      document.body.removeChild(notification);
+    }, 5000);
+  }

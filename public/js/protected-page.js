@@ -1,4 +1,4 @@
-const socket = io();
+const sockets = io();
 const greetHeader = document.getElementById('title');
 const nav = document.getElementById("nav");
 var popup = document.getElementById("h2__popup");
@@ -15,11 +15,10 @@ if (localStorage.getItem('isLoggedIn') == "false") {
     } 
 }
 
-socket.emit("getUserData", localStorage.getItem('username'));
+sockets.emit("getUserData", localStorage.getItem('username'));
 
-socket.on("sendData", (data) => {
+sockets.on("sendData", (data) => {
   if (data.admin == "true"){
-    console.log(nav.innerHTML);
     nav.innerHTML = `
       <a href="index.html">accueil</a>
       <a href="chat.html">chat</a>
@@ -34,7 +33,6 @@ socket.on("sendData", (data) => {
 popup.addEventListener('click', function(event) {
     createPopup(event);
 }); 
-  
 
 function createPopup(event) {
     const popupContainer = document.createElement('div');

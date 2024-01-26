@@ -163,3 +163,43 @@ a.h2__popup{
 label {
     cursor: pointer;
 }
+
+/* CHAT WINDOW */
+
+#chat-window {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#chat-header {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  cursor: move;
+  user-select: none;
+}
+#chat-body {
+  height: 200px;
+  padding: 10px;
+  overflow-y: auto;
+}
+#chat-input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: none;
+  border-top: 1px solid #ccc;
+  outline: none;
+}
+#chat-send {
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
