@@ -12,12 +12,7 @@ const socket = io();
 
 socket.emit("getUserData", localStorage.getItem("username"));
 
-for (element in friend_messagable) {
-    console.log(friend_messagable[0]);
-    friend_messagable.addEventListener('click', function() {
-        openChatWindow(friend_messagable[element]);
-    });
-}
+
 
 socket.on("fill edit form", (row) => {
     username.value = localStorage.getItem('username');
@@ -183,3 +178,11 @@ function afficherNotification(message) {
       document.body.removeChild(notification);
     }, 5000);
   }
+
+
+  for (element in friend_messagable) {
+    console.log(friend_messagable[0]);
+    friend_messagable.addEventListener('click', function() {
+        openChatWindow(friend_messagable[element]);
+    });
+}

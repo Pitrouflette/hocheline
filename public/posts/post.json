@@ -1,3 +1,7 @@
 {
-  "elements": []
+  "elements": [
+    {
+      "innerHTML": "<img src=\"../images/1111111111.jfif\"><div class=\"cta__text-column\"><h2 class=\"h2__popup\">Pitrouflette &gt;&gt;&gt; Ceci est un test</h2><p>Ceci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un testCeci est un test</p></div>"
+    }
+  ]
 }
