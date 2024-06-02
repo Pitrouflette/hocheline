@@ -7,7 +7,6 @@ const delete_profil = document.getElementById('delete');
 const friend_button = document.getElementById('add-friend');
 const friend_name = document.getElementById('name-friend');
 const friend_list = document.getElementById('freind-list');
-const friend_messagable = document.getElementsByClassName('messagable');
 const socket = io();
 
 socket.emit("getUserData", localStorage.getItem("username"));
@@ -15,14 +14,27 @@ socket.emit("getUserData", localStorage.getItem("username"));
 
 
 socket.on("fill edit form", (row) => {
-    username.value = localStorage.getItem('username');
-    email.value = row.email;
-    password.value = row.password;
-    for (friend in row.friends.split(",")){
-        friend_list.innerHTML += `<p class="messagable"> • ${row.friends.split(",")[friend]}</p>`;
-    }
-    localStorage.setItem('password', row.password);
-    localStorage.setItem('email', row.email);
+  username.value = localStorage.getItem('username');
+  email.value = row.email;
+  password.value = row.password;
+  for (friend in row.friends.split(",")){
+    friend_list.innerHTML += `<a class="messagable" href="#"> • ${row.friends.split(",")[friend]}</a>`;
+  }
+
+  if (friend_list) {
+      var collection = [];
+
+      for (var i = 0; i < friend_list.childNodes.length; i++) {
+          var childNode = friend_list.childNodes[i];
+          if (childNode.nodeType === Node.ELEMENT_NODE && childNode.tagName === 'A') {
+            collection.push(childNode);
+          }
+      }
+      console.log(collection);
+      addClickEvent(collection);
+  }
+  localStorage.setItem('password', row.password);
+  localStorage.setItem('email', row.email);
 });
 
 socket.on("profil edited", (data) => {
@@ -114,7 +126,7 @@ function openChatWindow(element) {
     var chatSendButton = document.createElement("button");
     chatSendButton.id = "chat-send";
     chatSendButton.textContent = "Envoyer";
-    chatSendButton.onclick = envoyerMessage;
+    //chatSendButton.onclick = envoyerMessage;
     chatWindow.appendChild(chatHeader);
     chatWindow.appendChild(chatBody);
     chatWindow.appendChild(chatInput);
@@ -177,12 +189,13 @@ function afficherNotification(message) {
     setTimeout(function() {
       document.body.removeChild(notification);
     }, 5000);
-  }
-
-
-  for (element in friend_messagable) {
-    console.log(friend_messagable[0]);
-    friend_messagable.addEventListener('click', function() {
-        openChatWindow(friend_messagable[element]);
-    });
 }
+
+function addClickEvent(collection) {
+  for (var i = 0; i < collection.length; i++) {
+    collection[i].addEventListener('click', function() {
+      openChatWindow(collection[i]);
+    });
+  }
+}
+
