@@ -285,7 +285,6 @@ io.on('connection', (socket) => {
        console.error(err.message);
        return;
      }
-     // Envoyez les données au client
      socket.emit('recive DB', rows);
    });
   });

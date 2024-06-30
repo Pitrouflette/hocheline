@@ -11,8 +11,6 @@ const socket = io();
 
 socket.emit("getUserData", localStorage.getItem("username"));
 
-
-
 socket.on("fill edit form", (row) => {
   username.value = localStorage.getItem('username');
   email.value = row.email;
