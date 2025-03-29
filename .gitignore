@@ -1,0 +1,48 @@
+# Dépendances
+/node_modules
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+.pnpm-debug.log
+
+# Documentation
+/Documentation.docx
+/Documentation.pdf
+
+# Environnement
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Logs
+/logs
+*.log
+
+# Fichiers de configuration d'éditeur
+/.vscode
+/.idea
+*.swp
+*.swo
+
+# Fichiers de build
+/dist
+/build
+/out
+
+# Fichiers de verrou de package
+/package-lock.json
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Cache
+.cache
+.npm
+.eslintcache

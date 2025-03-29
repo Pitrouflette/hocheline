@@ -22,8 +22,8 @@ socket.on("recive DB", (data) => {
 socket.emit("admin data", "");
 socket.on("admin", (data) => {
     console.log(data);
-    onlines.innerHTML = (data.onlines);
-    visiters.innerHTML = (data.visiters - 2);
+    onlines.innerHTML = (data.onlines) / 2;
+    visiters.innerHTML = (data.visiters / 2);
     messages.innerHTML = (data.messages);
     posts.innerHTML = (data.posts);
 });

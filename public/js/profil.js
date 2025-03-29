@@ -72,9 +72,6 @@ socket.on('friend added waiting', (friend) =>{
     afficherNotification("Vous avez ajouter " +  friend + " comme ami(e), pour pouvoir communiquer avec lui, il faut qu'il vous ajoute a son tour !");
 });
 
-
-
-
 submit.addEventListener('click', function(event){
     if(localStorage.getItem("username") == username.value || localStorage.getItem("password") == password.value || localStorage.getItem("email") == email.value){
         const data = {
