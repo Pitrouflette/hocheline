@@ -1,0 +1,96 @@
+/* Variables pour faciliter la personnalisation */
+:root {
+    --primary-color: #0a192f;       /* Bleu foncé */
+    --secondary-color: #112240;     /* Bleu moyen */
+    --accent-color: #64ffda;        /* Turquoise */
+    --text-primary: #e6f1ff;        /* Blanc bleuté */
+    --text-secondary: #8892b0;      /* Gris bleuté */
+    --danger-color: #ff6b6b;        /* Rouge pour les alertes */
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --transition-speed: 0.3s;
+}
+
+/* Reset et styles globaux */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Conteneur principal */
+.container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Envoi de message */
+.send-message {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 1rem;
+    border-radius: 1rem;
+    background-color: var(--secondary-color);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#user-message {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+#user-message:focus{
+    border: none;
+}
+
+#send-btn {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+#send-btn:hover {
+    background-color: #53d6b6;
+}
+
+/* Messages */
+.message {
+    margin: 0.2rem;
+    height: fit-content;
+    border: solid 2px #046b90 !important;
+    background-color: #00213b;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.admin2-message {
+  color: black;
+  font-size: larger;
+  background-color: #046b90;
+}

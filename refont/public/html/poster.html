@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/poster.css">
+    <link rel="shortcut icon" href="../logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Hocheline - Publier</title>
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="container">
+        <h1>Poster une publication</h1>
+        <form action="">
+            <label for="title">Titre:</label>
+            <input type="text" id="title-input" name="title" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button class="submit">Poster</button>
+        </form>
+    </div>
+    <div id="footer-container"></div>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="../js/poster.js"></script>
+    <script src="../js/protected-page.js"></script>
+</body>
+</html>
