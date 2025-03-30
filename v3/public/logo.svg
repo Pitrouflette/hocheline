@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Fond circulaire -->
+  <circle cx="100" cy="100" r="90" fill="#0a192f"/>
+  
+  <!-- Cercle intérieur -->
+  <circle cx="100" cy="100" r="75" fill="#112240"/>
+  
+  <!-- Éléments de connexion symbolisant un réseau social -->
+  <circle cx="100" cy="70" r="15" fill="#64ffda"/>
+  <circle cx="60" cy="110" r="12" fill="#64ffda"/>
+  <circle cx="140" cy="110" r="12" fill="#64ffda"/>
+  
+  <!-- Lignes de connexion -->
+  <line x1="100" y1="70" x2="60" y2="110" stroke="#64ffda" stroke-width="4"/>
+  <line x1="100" y1="70" x2="140" y2="110" stroke="#64ffda" stroke-width="4"/>
+  <line x1="60" y1="110" x2="140" y2="110" stroke="#64ffda" stroke-width="4"/>
+  
+  <!-- Ordinateur portable au centre -->
+  <rect x="75" y="125" width="50" height="30" rx="2" fill="#e6f1ff"/>
+  <rect x="75" y="125" width="50" height="25" rx="2" fill="#8892b0"/>
+  <rect x="78" y="128" width="44" height="19" rx="1" fill="#0a192f"/>
+  <rect x="70" y="155" width="60" height="3" rx="1" fill="#e6f1ff"/>
+</svg>

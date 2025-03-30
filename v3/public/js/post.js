@@ -1,8 +1,10 @@
 const socks = io();
 const container = document.getElementById("post-container");
-const popups = document.getElementsByClassName("h2__popup");
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeButton = document.querySelector('.close-button');
 
-socks.emit('register post', "")
+socks.emit('register post', "");
 
 socks.on("display post", (postList) => {
   var rumor = document.getElementById("post-container");
@@ -12,83 +14,41 @@ socks.on("display post", (postList) => {
     article.classList.add("cta");
     article.innerHTML = element;
     rumor.appendChild(article);
-  }  
-});
-
-container.addEventListener('click', function (event) {
-  socks.emit("postIncreas", "");
-  const clickedElement = event.target.closest('.h2__popup');
-
-  if (clickedElement && clickedElement.innerText !== "élèves") {
-    console.log(clickedElement.innerText.split(" ")[0]);
-    const data1 = {
-      username: clickedElement.innerText.split(" ")[0],
-      event: event
-    };
-    socks.emit("getUserEmail", (data1));
-  }
-});
-
-socks.on("popup info", (data) => {
-  console.log(data.username, data.event, data.email, data.admin);
-  createPopupPost(data.username, data.event, data.email, data.admin);
-});
-
-function createPopupPost(username, event, email, admin) {
-  const popupContainer = document.createElement('div');
-  popupContainer.classList.add('popup');
-
-  const closeButton = document.createElement('span');
-  closeButton.classList.add('close');
-  closeButton.innerHTML = '&times;'; // '×' symbol for close
-  closeButton.addEventListener('click', function () {
-    document.body.removeChild(popupContainer);
-  });
-
-  const content = document.createElement('div');
-  content.classList.add('popup__div');
-  content.innerHTML = `
-    <p>Username: ${username}</p>
-    <p>Email: ${email}</p>
-  `;
-  if(admin === "true"){
-    content.innerHTML = `
-    <p>Username: ${username}</p>
-    <p>Email: ${email}</p>
-    <p>Infos supplémentaires: Cet utilisateur est administrateur</p>
-  `;
   }
   
-  popupContainer.style.left = `${event.pageX}px`;
-  popupContainer.style.top = `${event.pageY}px`;
+  // Appliquer les écouteurs d'événements après que les images sont chargées
+  setupLightboxListeners();
+});
 
-  let isDragging = false;
-  let offsetX, offsetY;
-
-  popupContainer.addEventListener('mousedown', function (mousedownEvent) {
-    isDragging = true;
-
-    offsetX = mousedownEvent.clientX - popupContainer.getBoundingClientRect().left - 200;
-    offsetY = mousedownEvent.clientY - popupContainer.getBoundingClientRect().top - 80;
-
-    document.body.style.userSelect = 'none';
+// Fonction pour configurer les écouteurs d'événements du lightbox
+function setupLightboxListeners() {
+  // Sélectionner toutes les images avec la classe post-image
+  const images = document.querySelectorAll('.post-image');
+  
+  // Ajouter un écouteur d'événement à chaque image
+  images.forEach(image => {
+    image.addEventListener('click', () => {
+      lightboxImg.src = image.src;
+      lightbox.classList.add('active');
+    });
   });
-
-  document.addEventListener('mouseup', function () {
-    isDragging = false;
-
-    document.body.style.userSelect = '';
-  });
-
-  document.addEventListener('mousemove', function (mousemoveEvent) {
-    if (isDragging) {
-      popupContainer.style.left = `${mousemoveEvent.clientX - offsetX}px`;
-      popupContainer.style.top = `${mousemoveEvent.clientY - offsetY}px`;
-    }
-  });
-
-  popupContainer.appendChild(closeButton);
-  popupContainer.appendChild(content);
-
-  document.body.appendChild(popupContainer);
 }
+
+// Fermer le lightbox quand on clique sur la croix
+closeButton.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+});
+
+// Fermer le lightbox quand on clique en dehors de l'image
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.remove('active');
+  }
+});
+
+// Fermer le lightbox avec la touche Echap
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+    lightbox.classList.remove('active');
+  }
+});

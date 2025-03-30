@@ -122,7 +122,7 @@ io.on('connection', (socket) => {
         const data = {
           username: username,
           password: password,
-          url: "http://192.168.1.135:3000/"
+          url: "home.html"
         };
         socket.emit('redirect', data);
       }

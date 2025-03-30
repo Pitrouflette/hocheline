@@ -43,6 +43,7 @@ submit.addEventListener('click', () => {
     p.textContent = descriptionValue;
   }
   var img = document.createElement('img');
+  img.classList.add("post-image")
   if (selectedFile) {
     var imageUrl = URL.createObjectURL(selectedFile);
     img.src = "../images/" + selectedFile.name;
