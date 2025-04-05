@@ -6,16 +6,13 @@ submit.addEventListener('click', () => {
 
   var titleInput = document.getElementById('title-input');
   var descriptionInput = document.getElementById('description');
-  var imageInput = document.getElementById('image');
   
   var titleValue = titleInput.value;
   var descriptionValue = descriptionInput.value;
-  var selectedFile = imageInput.files[0];
 
    var formData = new FormData();
    formData.append('title', titleValue);
    formData.append('description', descriptionValue);
-   formData.append('image', selectedFile);
   
    fetch('/upload', {
      method: 'POST',
@@ -42,22 +39,14 @@ submit.addEventListener('click', () => {
   if (descriptionValue) {
     p.textContent = descriptionValue;
   }
-  var img = document.createElement('img');
-  img.classList.add("post-image")
-  if (selectedFile) {
-    var imageUrl = URL.createObjectURL(selectedFile);
-    img.src = "../images/" + selectedFile.name;
-  }
   textColumn.appendChild(h2);
   textColumn.appendChild(p);
-  article.appendChild(img);
   article.appendChild(textColumn);
 
   socks.emit("register post", article.innerHTML);
   
   titleInput.value = "";
   descriptionInput.value = "";
-  imageInput.value = "";
 
   window.location.reload();
   window.location.href = "post.html";
