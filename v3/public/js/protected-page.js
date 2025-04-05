@@ -44,7 +44,7 @@ if (localStorage.getItem('isLoggedIn') == "false") {
 } else {
   // Lancer le chargement du header et du footer
   loadHeader();
-  loadFooter();
+  //loadFooter();
 }
 
 // Gestion de la réception des données utilisateur
