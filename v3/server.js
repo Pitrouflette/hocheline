@@ -24,7 +24,7 @@ const loginDB = new sqlite3.Database('public/db/users.db', sqlite3.OPEN_READWRIT
   if(err) return console.error(err.message);
 });
 
-sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin,friends)';
+sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin,friends,perms,cond)';
 loginDB.run(sql);
 
 app.get('/', (req, res) => {
