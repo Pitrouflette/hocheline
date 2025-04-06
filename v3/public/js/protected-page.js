@@ -43,9 +43,6 @@ if (localStorage.getItem('isLoggedIn') == "false") {
 } else {
   loadHeader();
   loadFooter();
-  if(localStorage.getItem("conditions") != "True"){
-    window.location.href = 'conditions.html';
-  }
 }
 
 sockets.on("sendData", (data) => {

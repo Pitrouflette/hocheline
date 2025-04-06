@@ -286,28 +286,29 @@ body {
 .container1 {
     display: flex;
     justify-content:center;
+    margin-bottom: 1rem;
 }
 .styled {
 
-    width: 260px;
-    border: 0;
-    line-height: 2.5;
-    padding: 0 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     font-size: 1rem;
-    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
     text-align: center;
-    color:var(--text-secondary);
-    border-radius: 10px;
-    background-color:var(--secondary-color) ;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--accent-color);
+    color: var(--primary-color);
   }
   
   .styled:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    background-color: var(--danger-color);
-    color: var(--primary-color);
-
+    background-color: #53d6b6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
   
   .styled:active {
