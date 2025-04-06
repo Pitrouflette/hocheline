@@ -24,7 +24,7 @@ const loginDB = new sqlite3.Database('public/db/users.db', sqlite3.OPEN_READWRIT
   if(err) return console.error(err.message);
 });
 
-sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin,friends,perms,cond)';
+sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin,perms,cond)';
 loginDB.run(sql);
 
 app.get('/', (req, res) => {
@@ -122,69 +122,10 @@ io.on('connection', (socket) => {
         const data = {
           username: username,
           password: password,
-          url: "home.html"
+          url: "home.html",
+          cond: row.cond
         };
         socket.emit('redirect', data);
-      }
-    });
-  });
-  socket.on("add friend", (data) => {
-    const username = data.sender;
-    const id = data.id;
-    const newFriend = data.friend;
-
-    const sqlSelect = "SELECT friends FROM users WHERE username = ?";
-    loginDB.get(sqlSelect, [username], (err, row) => {
-      if (err) {
-        console.error(err.message);
-        return;
-      }
-      if (row) {
-        let currentFriends = "initial state";
-        if (row.friends.includes(",")){
-          currentFriends = row.friends.split(",");
-        }else{
-          currentFriends = row.friends;
-        }
-        
-        console.log(currentFriends);
-  
-        if (currentFriends.includes(newFriend)) {
-          io.to(id).emit("friend already added", newFriend);
-        } else {
-  
-          const updatedFriends = currentFriends + "," + newFriend;
-          const sqlUpdate = "UPDATE users SET friends = ? WHERE username = ?";
-  
-          loginDB.run(sqlUpdate, [updatedFriends, username], function (err) {
-            if (err) {
-              console.error(err.message);
-              return;
-            }
-
-            if (this.changes > 0) {
-              const sqlSelect2 = "SELECT friends FROM users WHERE username = ?";
-              loginDB.get(sqlSelect2, [newFriend], (err, row) => {
-                if (err) {
-                  console.error(err.message);
-                  return;
-                }if(row){
-                  if(row.friends.includes(username)) {
-                    io.to(id).emit("friend added", newFriend);
-                  }else{
-                    io.to(id).emit("friend added waiting", newFriend);
-                  }
-                }else{
-                  io.to(id).emit("wrong name", newFriend);
-                }
-              });
-            } else {
-              io.to(id).emit("update failed", newFriend);
-            }
-          });
-        }
-      } else {
-        io.to(id).emit("wrong name", newFriend);
       }
     });
   });
@@ -226,7 +167,7 @@ io.on('connection', (socket) => {
     });
   });
   socket.on("getUserData", (username) => {
-    sql = "SELECT email, password, admin, friends FROM users WHERE username = ?";
+    sql = "SELECT email, password, admin, cond FROM users WHERE username = ?";
     loginDB.get(sql, [username], (err, row) => {
       if (err) {
         console.error(err.message);
@@ -268,6 +209,20 @@ io.on('connection', (socket) => {
      socket.emit('recive DB', rows);
    });
   });
+
+  socket.on("conditions acceptées", (data) => {
+    console.log("ok coté serv")
+    sql = "SELECT * FROM users WHERE username = ?";
+    loginDB.run(sql, [data.sender_name], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      if (row) {
+        io.to(data.id).emit("condition acceptées redirection");
+      }
+    });
+   });
 });
 
 function creerListeDepuisObjet(obj) {

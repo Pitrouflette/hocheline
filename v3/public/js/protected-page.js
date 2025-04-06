@@ -38,16 +38,16 @@ function updateNavigation() {
   sockets.emit("getUserData", localStorage.getItem('username'));
 }
 
-// Vérification de la connexion et chargement des éléments
 if (localStorage.getItem('isLoggedIn') == "false") {
   window.location.href = 'login.html';
 } else {
-  // Lancer le chargement du header et du footer
   loadHeader();
   loadFooter();
+  if(localStorage.getItem("conditions") != "True"){
+    window.location.href = 'conditions.html';
+  }
 }
 
-// Gestion de la réception des données utilisateur
 sockets.on("sendData", (data) => {
   const nav = document.getElementById("nav");
   if (data.admin == "true") {
@@ -59,5 +59,11 @@ sockets.on("sendData", (data) => {
       <a href="profil.html" class="nav-link">compte</a>
       <a href="admin.html" class="nav-link admin">admin panel</a>
     `;
+  }
+  if (localStorage.getItem('isLoggedIn') == "false") {
+    window.location.href = 'login.html';
+  } else {
+    loadHeader();
+    loadFooter();
   }
 });
