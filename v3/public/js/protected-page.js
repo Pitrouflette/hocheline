@@ -1,5 +1,35 @@
 const sockets = io();
 
+
+if (localStorage.getItem('isLoggedIn') != "true") {
+  console.log(localStorage.getItem('isLoggedIn'));
+  window.location.href = 'login.html';
+} else {
+  loadHeader();
+  //loadFooter();
+}
+
+sockets.on("sendData", (data) => {
+  if(data.cond != "true"){
+    window.location.href = 'conditions.html';
+  }
+  const nav = document.getElementById("nav");
+  if (data.admin == "true") {
+    nav.innerHTML = `
+      <a href="home.html" class="nav-link">accueil</a>
+      <a href="chat.html" class="nav-link">chat</a>
+      <a href="post.html" class="nav-link">post</a>
+      <a href="poster.html" class="nav-link">poster</a>
+      <a href="profil.html" class="nav-link">compte</a>
+      <a href="admin.html" class="nav-link admin">admin panel</a>
+    `;
+  }
+});
+
+function updateNavigation() {
+  sockets.emit("getUserData", localStorage.getItem('username'));
+}
+
 async function loadHeader() {
   try {
     const response = await fetch('../html/header.html');
@@ -33,34 +63,3 @@ async function loadFooter() {
     console.error('Erreur lors du chargement du footer:', error);
   }
 }
-
-function updateNavigation() {
-  sockets.emit("getUserData", localStorage.getItem('username'));
-}
-
-if (localStorage.getItem('isLoggedIn') == "false") {
-  window.location.href = 'login.html';
-} else {
-  loadHeader();
-  loadFooter();
-}
-
-sockets.on("sendData", (data) => {
-  const nav = document.getElementById("nav");
-  if (data.admin == "true") {
-    nav.innerHTML = `
-      <a href="home.html" class="nav-link">accueil</a>
-      <a href="chat.html" class="nav-link">chat</a>
-      <a href="post.html" class="nav-link">post</a>
-      <a href="poster.html" class="nav-link">poster</a>
-      <a href="profil.html" class="nav-link">compte</a>
-      <a href="admin.html" class="nav-link admin">admin panel</a>
-    `;
-  }
-  if (localStorage.getItem('isLoggedIn') == "false") {
-    window.location.href = 'login.html';
-  } else {
-    loadHeader();
-    loadFooter();
-  }
-});

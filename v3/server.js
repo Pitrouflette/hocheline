@@ -211,15 +211,21 @@ io.on('connection', (socket) => {
   });
 
   socket.on("conditions acceptées", (data) => {
-    console.log("ok coté serv")
-    sql = "SELECT * FROM users WHERE username = ?";
-    loginDB.run(sql, [data.sender_name], (err, row) => {
+    sql = 'SELECT * FROM users WHERE username = ?';
+    loginDB.get(sql, [data.sender_name], (err, row) => {
       if (err) {
         console.error(err.message);
         return;
       }
       if (row) {
-        io.to(data.id).emit("condition acceptées redirection");
+        sql = "UPDATE users SET cond = ? WHERE username = ?";
+        loginDB.run(sql, ["true", row.username], (err, row) => {
+          if (err) {
+            console.error(err.message);
+            return;
+          }
+          io.to(data.id).emit("condition acceptées redirection");
+        });
       }
     });
    });
