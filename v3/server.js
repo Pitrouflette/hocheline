@@ -5,8 +5,10 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const multer = require('multer');
 const path = require('path');
-const port = 3000;
+const port = 3030;
 const sqlite3 = require('sqlite3').verbose();
+const chalk = require('chalk');
+const figlet = require('figlet');
 
 const filePath = 'public/posts/post.json';
 
@@ -20,8 +22,8 @@ let sql;
 
 var postVar = "";
 
-const loginDB = new sqlite3.Database('public/db/users.db', sqlite3.OPEN_READWRITE, (err) => {
-  if(err) return console.error(err.message);
+const loginDB = new sqlite3.Database(__dirname + '/public/db/users.db', sqlite3.OPEN_READWRITE, (err) => {
+  if(err) return (console.error(err.message));
 });
 
 sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin,perms,cond)';
@@ -30,7 +32,7 @@ loginDB.run(sql);
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/html/home.html');
 });
-
+app.use(express.static(__dirname + '/public/html'));
 io.on('connection', (socket) => {
 
   const clientIp = socket.handshake.address; 
@@ -272,16 +274,15 @@ app.post('/upload', upload.single('image'), (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(port, () => {
-  console.log(`██   ██  ██████   ██████ ██   ██ ███████ ██      ██ ███    ██ ███████     ██     ██ ███████ ██████   █████  ██████  ██████  
-██   ██ ██    ██ ██      ██   ██ ██      ██      ██ ████   ██ ██          ██     ██ ██      ██   ██ ██   ██ ██   ██ ██   ██ 
-███████ ██    ██ ██      ███████ █████   ██      ██ ██ ██  ██ █████       ██  █  ██ █████   ██████  ███████ ██████  ██████  
-██   ██ ██    ██ ██      ██   ██ ██      ██      ██ ██  ██ ██ ██          ██ ███ ██ ██      ██   ██ ██   ██ ██      ██      
-██   ██  ██████   ██████ ██   ██ ███████ ███████ ██ ██   ████ ███████      ███ ███  ███████ ██████  ██   ██ ██      ██      
-                                                                                                                            
-                                                                                                                            `);
-});
+app.listen(port, "0.0.0.0",() => {
+  console.log('\n' + chalk.gray('────────────────────────────────────────────────────────────────────────────────────────\n'));
 
-http.listen(port, '0.0.0.0', () => {
-  console.log(`Serveur bien démarré sur le port ${port}`);
+  console.log(chalk.magentaBright(figlet.textSync('Gossip Hoche', {font: 'ANSI Shadow',horizontalLayout: 'default',verticalLayout: 'default'})));
+  
+  console.log('\n' + chalk.bold.green('🚀 Serveur lancé avec succès !\n'));
+
+  console.log(chalk.white('                   📡 Accès local     : ') + chalk.cyanBright(`http://localhost:${port}`));
+  console.log(chalk.white('                   🌍 Accès externe   : ') + chalk.cyanBright(`http://88.127.129.62:${port}`));
+
+  console.log('\n' + chalk.gray('────────────────────────────────────────────────────────────────────────────────────────\n'));
 });
