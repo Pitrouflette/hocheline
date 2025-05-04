@@ -3,7 +3,6 @@ const fs = require('fs');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const multer = require('multer');
 const path = require('path');
 const port = 3030;
 const sqlite3 = require('sqlite3').verbose();
