@@ -34,9 +34,17 @@ submit.addEventListener('click', function(event){
             old_username: localStorage.getItem("username"),
             username: username.value,
             password: password.value
-          };
-        socket.emit("edit profil", data);
+        };
+        socket.emit("checkUsername", (data));
     }
+});
+
+socket.on("signUpOK", (data) => {
+    socket.emit("edit profil", data);
+});
+
+socket.on("UsernameAlreadyTaken", () =>{
+    afficherNotification("This username is already taken...")
 });
 
 delete_profil.addEventListener('click', function(event){

@@ -16,21 +16,27 @@ submit.addEventListener('click', () => {
             username: username,
             password: password
         };
-
-        socket.emit("sign up", userData);
-        socket.emit("login", username, password);
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        socket.emit("getID", (username));
+        socket.emit("checkUsername", (userData));
     }
+
+    socket.on("signUpOK", (data) => {
+        console.log("okk, poas 2 username")
+        socket.emit("sign up", data);
+        socket.emit("login", data.username, data.password);
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("password", data.password);
+        socket.emit("getID", (data.username));
+    });
+
+    socket.on("UsernameAlreadyTaken", () =>{
+        afficherNotification("This username is already taken...")
+    })
 
     socket.on("receiveID", (id) => {
         localStorage.setItem("id", id);
         window.location.href = 'post.html'; 
     });
-
-    
 
     function afficherNotification(message) {
 

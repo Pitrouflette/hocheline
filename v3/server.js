@@ -28,7 +28,7 @@ sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password
 loginDB.run(sql);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/html/conditions.html');
+  res.sendFile(__dirname + '/public/html/post.html');
 });
 app.use(express.static(path.join(__dirname, 'public/html')));
 io.on('connection', (socket) => {
@@ -222,7 +222,25 @@ io.on('connection', (socket) => {
         console.error(err.message);
         return;
       }
-      socket.emit("receiveID", row.id);
+      if(row){
+        socket.emit("receiveID", row.id);
+      }
+    });
+   });
+
+   socket.on("checkUsername", (data) => {
+    const sql = 'SELECT * FROM users WHERE username = ? ';
+    loginDB.get(sql, [data.username], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      if(row){
+        socket.emit("UsernameAlreadyTaken");
+      }else{
+        socket.emit("signUpOK", (data));
+      }
+      
     });
    });
 
@@ -237,7 +255,7 @@ io.on('connection', (socket) => {
         sql = "UPDATE users SET cond = ? WHERE username = ?";
         loginDB.run(sql, ["true", row.username], (err, row) => {
           if (err) {
-            console.error(err.message);
+            console.error(err.message);   //checkUsername
             return;
           }
           io.to(data.id).emit("condition acceptées redirection");
