@@ -10,30 +10,17 @@ submit.addEventListener('click', () => {
   var titleValue = titleInput.value;
   var descriptionValue = descriptionInput.value;
 
-   var formData = new FormData();
-   formData.append('title', titleValue);
-   formData.append('description', descriptionValue);
-  
-   fetch('/upload', {
-     method: 'POST',
-     body: formData,
-   })
-     .then((response) => response.text())
-     .then((data) => {
-       console.log(data); 
-     })
-     .catch((error) => {
-       console.error('Erreur:', error);
-     });
+  var formData = new FormData();
+  formData.append('title', titleValue);
+  formData.append('description', descriptionValue);
 
   var article = document.createElement('div');
   article.classList.add('cta');
   var textColumn = document.createElement('div');
   textColumn.classList.add('cta__text-column');
   var h2 = document.createElement('h2');
-  h2.classList.add("h2__popup")
   if (titleValue) {
-    h2.textContent = localStorage.getItem("username") + " >>> " + titleValue;
+    h2.textContent = "#" + localStorage.getItem("id") + " >>> " + titleValue;
   }
   var p = document.createElement('p');
   if (descriptionValue) {

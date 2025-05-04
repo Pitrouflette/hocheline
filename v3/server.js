@@ -271,21 +271,6 @@ function creerListeDepuisObjet(obj) {
   }
 }
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, 'public', 'images'));
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post('/upload', upload.single('image'), (req, res) => {
-  res.send('Fichier téléchargé avec succès !');
-});
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 http.listen(port, "0.0.0.0",() => {
