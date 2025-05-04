@@ -8,6 +8,7 @@
     --danger-color: #ff6b6b;        /* Rouge pour les alertes */
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     --transition-speed: 0.3s;
+    --header-width: 250px;          /* Largeur du header latéral */
 }
 
 /* Reset et styles globaux */
@@ -28,16 +29,44 @@ body {
     color: var(--text-secondary);
     line-height: 1.6;
     display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+
+/* Structure principale - décalée à droite pour laisser la place au header latéral */
+.main-content {
+    margin-left: var(--header-width);
+    width: calc(100% - var(--header-width));
+    height: 100vh;
+    display: flex;
     flex-direction: column;
 }
 
-/* Conteneur principal */
+/* Conteneur principal des messages */
 .container {
     flex: 1;
-    max-width: max-content;
     width: 100%;
     padding: 20px;
-    overflow-y: auto;
+    overflow-y: scroll;
+    
+}
+
+/* Scrollbar personnalisée pour le conteneur de messages */
+.container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+    background: var(--primary-color);
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background: #53d6b6;
 }
 
 /* Envoi de message */
@@ -49,6 +78,9 @@ body {
     border-radius: 1rem;
     background-color: var(--secondary-color);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    bottom: 0;
+    width: calc(100% - 2rem);
 }
 
 #user-message {
@@ -59,15 +91,17 @@ body {
     background-color: var(--primary-color);
     color: var(--text-primary);
     font-size: 1rem;
+    min-height: 44px;
 }
 
-#user-message:focus{
+#user-message:focus {
+    outline: 1px solid var(--accent-color);
     border: none;
 }
 
 #send-btn {
     margin-left: 10px;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 4px;
     background-color: var(--accent-color);
@@ -75,6 +109,8 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color var(--transition-speed);
+    min-height: 44px;
+    white-space: nowrap;
 }
 
 #send-btn:hover {
@@ -83,17 +119,121 @@ body {
 
 /* Messages */
 .message {
-    margin: 0.2rem;
+    margin: 0.5rem 0;
     height: fit-content;
+    max-width: 80%;
     width: fit-content;
     border: solid 2px #046b90 !important;
     background-color: #00213b;
     border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
+    word-wrap: break-word;
+
 }
 
 .admin2-message {
-  color: black;
-  font-size: larger;
-  background-color: #046b90;
+    color: black;
+    font-size: 1rem;
+    background-color: #046b90;
+
+}
+
+/* Mise en page des messages */
+#message-container {
+    display: block;
+    width: 100%;
+}
+
+/* Espacement entre les messages */
+#message-container > .message {
+    margin-bottom: 0.8rem;
+}
+
+/* Media queries pour différentes tailles d'écran */
+/* Tablettes et téléphones */
+@media screen and (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        height: calc(100vh - 90px); /* Ajustement pour le header en haut */
+    }
+    
+    .container {
+        height: calc(100vh - 160px); /* Ajustement pour le header et la zone de message */
+    }
+    
+    .send-message {
+        padding: 8px 15px;
+        margin: 0.8rem;
+    }
+    
+    .message {
+        max-width: 85%;
+    }
+}
+
+/* Smartphones */
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .main-content {
+        height: calc(100vh - 120px); /* Ajustement pour le header plus haut sur mobile */
+    }
+    
+    .container {
+        padding: 12px;
+        height: calc(100vh - 200px);
+    }
+    
+    .message {
+        max-width: 90%;
+        padding: 10px;
+        margin: 0.4rem 0;
+    }
+    
+    .send-message {
+        padding: 8px 12px;
+        margin: 0.5rem;
+    }
+    
+    #user-message, #send-btn {
+        font-size: 0.9rem;
+    }
+    
+    #send-btn {
+        padding: 8px 12px;
+    }
+}
+
+/* Pour les très petits écrans */
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .message {
+        max-width: 95%;
+        padding: 8px;
+    }
+    
+    .send-message {
+        padding: 6px 10px;
+        margin: 0.3rem;
+    }
+    
+    #send-btn {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+    
+    #user-message {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
 }
