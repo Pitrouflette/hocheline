@@ -10,8 +10,6 @@ const sqlite3 = require('sqlite3').verbose();
 const chalk = require('chalk');
 const figlet = require('figlet');
 
-const filePath = 'public/posts/post.json';
-
 let onlineCount = 0;
 let visitCount = 0;
 let messageCount = 0;
@@ -55,7 +53,7 @@ io.on('connection', (socket) => {
 
   socket.on('register post', (innerHTML) => {
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    fs.readFile('public/posts/post-raw.json', 'utf8', (err, data) => {
       let jsonData = {};
   
       if (err) {
@@ -85,14 +83,173 @@ io.on('connection', (socket) => {
       
       const updatedJsonContent = JSON.stringify(jsonData, null, 2);
   
-      fs.writeFile(filePath, updatedJsonContent, 'utf8', (writeErr) => {
+      fs.writeFile('public/posts/post-raw.json', updatedJsonContent, 'utf8', (writeErr) => {
           if (writeErr) {
             console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
             return;
           }
       });
+    });
+  });
+
+  socket.on("getPosts", () =>{
+    fs.readFile('public/posts/post.json', 'utf8', (err, data) => {
+      let jsonData = {};
+  
+      if (err) {
+          if (err.code !== 'ENOENT') {
+            console.error('Erreur lors de la lecture du fichier JSON :', err);
+            return;
+          }
+      } else {
+          if (data.trim() !== '') {
+              try {
+                jsonData = JSON.parse(data);
+              } catch (jsonErr) {
+                console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
+                return;
+              }
+          }
+      }
+      if (!jsonData.elements) {
+          jsonData.elements = [];
+      }
+        
       postVar = creerListeDepuisObjet(jsonData.elements);
-      io.emit("display post", postVar);
+      socket.emit("display post", postVar);
+    });
+  });
+
+  socket.on("getRawPosts", () =>{
+    fs.readFile('public/posts/post-raw.json', 'utf8', (err, data) => {
+      let jsonData = {};
+  
+      if (err) {
+          if (err.code !== 'ENOENT') {
+            console.error('Erreur lors de la lecture du fichier JSON :', err);
+            return;
+          }
+      } else {
+          if (data.trim() !== '') {
+              try {
+                jsonData = JSON.parse(data);
+              } catch (jsonErr) {
+                console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
+                return;
+              }
+          }
+      }
+      if (!jsonData.elements) {
+          jsonData.elements = [];
+      }
+
+      postVar = creerListeDepuisObjet(jsonData.elements);
+      io.emit("recieveRawPosts", postVar);
+    });
+  });
+
+  socket.on("DiscaredPost", (index) =>{
+    fs.readFile('public/posts/post-raw.json', 'utf8', (err, data) => {
+      let jsonData = {};
+  
+      if (err) {
+          if (err.code !== 'ENOENT') {
+            console.error('Erreur lors de la lecture du fichier JSON :', err);
+            return;
+          }
+      } else {
+          if (data.trim() !== '') {
+              try {
+                jsonData = JSON.parse(data);
+              } catch (jsonErr) {
+                console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
+                return;
+              }
+          }
+      }
+      if (!jsonData.elements) {
+          jsonData.elements = [];
+      }
+      jsonData.elements.pop(index);
+      const updatedJsonContent = JSON.stringify(jsonData, null, 2);
+      fs.writeFile('public/posts/post-raw.json', updatedJsonContent, 'utf8', (writeErr) => {
+        if (writeErr) {
+          console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
+          return;
+        }
+      });
+    });
+  });
+
+  socket.on("AgreedPost", (index) =>{
+    fs.readFile('public/posts/post-raw.json', 'utf8', (err, data) => {
+      let jsonData = {};
+  
+      if (err) {
+          if (err.code !== 'ENOENT') {
+            console.error('Erreur lors de la lecture du fichier JSON :', err);
+            return;
+          }
+      } else {
+          if (data.trim() !== '') {
+              try {
+                jsonData = JSON.parse(data);
+              } catch (jsonErr) {
+                console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
+                return;
+              }
+          }
+      }
+      if (!jsonData.elements) {
+          jsonData.elements = [];
+      }
+      agreedPost = creerListeDepuisObjet(jsonData.elements)[index];
+      jsonData.elements.pop(index);
+      const updatedJsonContent = JSON.stringify(jsonData, null, 2);
+      fs.writeFile('public/posts/post-raw.json', updatedJsonContent, 'utf8', (writeErr) => {
+        if (writeErr) {
+          console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
+          return;
+        }
+      });
+      
+      fs.readFile('public/posts/post.json', 'utf8', (err, data) => {
+        let jsonData = {};
+    
+        if (err) {
+            if (err.code !== 'ENOENT') {
+              console.error('Erreur lors de la lecture du fichier JSON :', err);
+              return;
+            }
+        } else {
+            if (data.trim() !== '') {
+                try {
+                  jsonData = JSON.parse(data);
+                } catch (jsonErr) {
+                  console.error('Erreur lors de l\'analyse du JSON existant :', jsonErr);
+                  return;
+                }
+            }
+        }
+        if (!jsonData.elements) {
+            jsonData.elements = [];
+        }
+          
+        if(agreedPost){
+          jsonData.elements.push({
+            innerHTML: agreedPost
+          });
+        }
+        
+        const updatedJsonContent = JSON.stringify(jsonData, null, 2);
+    
+        fs.writeFile('public/posts/post.json', updatedJsonContent, 'utf8', (writeErr) => {
+            if (writeErr) {
+              console.error('Erreur lors de l\'écriture du fichier JSON :', writeErr);
+              return;
+            }
+        });
+      });
     });
   });
 

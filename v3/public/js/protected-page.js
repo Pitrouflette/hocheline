@@ -14,11 +14,12 @@ sockets.on("sendData", (data) => {
   console.log(data.admin);
   if (data.admin == "true") {
     nav.innerHTML = `
-      <a href="post.html" class="nav-link">home</a>
-      <a href="chat.html" class="nav-link">chat</a>
-      <a href="poster.html" class="nav-link">tell</a>
-      <a href="profil.html" class="nav-link">account</a>
-      <a href="admin.html" class="nav-link admin">admin panel</a>
+      <a href="post.html" class="nav-link"><i class='fas fa-home' ></i> home</a>
+      <a href="chat.html" class="nav-link"><i class='fas fa-comment-dots'></i> chat</a>
+      <a href="poster.html" class="nav-link"><i class='fas fa-plus'></i> tells</a>
+      <a href="profil.html" class="nav-link"><i class='fas fa-user-circle' ></i> account</a>
+      <a href="post-moderation.html" class="nav-link admin"><i class="fa-solid fa-gavel"></i> Posts Moderation</a>
+      <a href="admin.html" class="nav-link admin"><i class="fa-solid fa-crown"></i> admin panel</a>
     `;
   }
 });

@@ -4,7 +4,7 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeButton = document.querySelector('.close-button');
 
-socks.emit('register post', "");
+socks.emit('getPosts');
 
 socks.on("display post", (postList) => {
   var rumor = document.getElementById("post-container");
