@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/post.css">
-    <link rel="stylesheet" href="../css/footer-header.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="shortcut icon" href="../logo.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,18 +14,17 @@
 </head>
 <body>
     
-    <div id="header-container"></div>
+    <div id="header-container" class="header"></div>
+    <div class="main-content">
+        <div class="container" id="post-container"></div>
 
-    <div class="container" id="post-container"></div>
-
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <span class="close-button">&times;</span>
-            <img src="" alt="Image agrandie" class="lightbox-image" id="lightbox-img">
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-content">
+                <span class="close-button">&times;</span>
+                <img src="" alt="Image agrandie" class="lightbox-image" id="lightbox-img">
+            </div>
         </div>
     </div>
-
-    <div id="footer-container" class="footer-container-class"></div>
 
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="../js/post.js"></script>

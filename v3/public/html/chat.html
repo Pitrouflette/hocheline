@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/chat.css">
-    <link rel="stylesheet" href="../css/footer-header.css">
     <link rel="shortcut icon" href="../logo.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +15,15 @@
 </head>
 <body>
 
-    <div id="header-container"></div>
+    <div id="header-container" class="header"></div>
 
-    <div class="container" id="message-container"></div>
-
-    <div class="send-message">
-        <input type="text" id="user-message" placeholder="Envoyer un message">
-        <button id="send-btn">send</button>
+    <div class="main-content">
+        <div class="container" id="message-container"></div>
+        <div class="send-message">
+            <input type="text" id="user-message" placeholder="Envoyer un message">
+            <button id="send-btn">send</button>
+        </div>
     </div>
-
-    <div id="footer-container"></div>
     
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="../js/chat.js"></script>
