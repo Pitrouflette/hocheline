@@ -21,7 +21,7 @@ function sendMessage(){
   const message = messageInput.value;
   if (message.trim() !== '') {
     const msgNom = {
-      username: localStorage.getItem("username"),
+      username: "#" + localStorage.getItem("id"),
       message: message
     };
     socket.emit('chat message', msgNom);

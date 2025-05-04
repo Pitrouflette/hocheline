@@ -13,5 +13,5 @@ button_accept.addEventListener('click', function(event){
 
 socket.on("condition acceptées redirection", () =>{
     localStorage.setItem("condition", "True");
-    window.location.href = 'home.html';
+    window.location.href = 'post.html';
 });

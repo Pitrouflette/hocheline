@@ -24,7 +24,7 @@ const loginDB = new sqlite3.Database(__dirname + '/public/db/users.db', sqlite3.
   if(err) return (console.error(err.message));
 });
 
-sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,email,admin,perms,cond)';
+sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password,admin,perms,cond)';
 loginDB.run(sql);
 
 app.get('/', (req, res) => {
@@ -122,20 +122,20 @@ io.on('connection', (socket) => {
         const data = {
           username: username,
           password: password,
-          url: "home.html",
+          url: "post.html",
           cond: row.cond
         };
         socket.emit('redirect', data);
       }
     });
   });
+
   socket.on("sign up", (userData) =>{
     const username = userData.username;
     const password = userData.password;
-    const email = userData.email;
-    sql = 'INSERT INTO users (username, password, email) VALUES (?, ?, ?)';
-    loginDB.run(sql, [username, password, email], (err) => {
-      console.log(username, password, email);
+    sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
+    loginDB.run(sql, [username, password], (err) => {
+      console.log(username, password);
       const data = {
         username: username,
         password: password,
@@ -148,6 +148,7 @@ io.on('connection', (socket) => {
       }
     });
   });
+
   socket.on("check admin", (messageData) => {
     sql = "SELECT * FROM users WHERE username = ? AND admin = 'true'";
     loginDB.get(sql, [messageData.username], (err, row) => {
@@ -166,8 +167,9 @@ io.on('connection', (socket) => {
       }
     });
   });
+
   socket.on("getUserData", (username) => {
-    sql = "SELECT email, password, admin, cond FROM users WHERE username = ?";
+    sql = "SELECT password, admin, cond FROM users WHERE username = ?";
     loginDB.get(sql, [username], (err, row) => {
       if (err) {
         console.error(err.message);
@@ -179,9 +181,10 @@ io.on('connection', (socket) => {
       }
     });
   });
+
   socket.on("edit profil", (data) => {
-    sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE username = ?";
-    loginDB.run(sql, [data.username, data.email, data.password, data.old_username], (err, row) => {
+    sql = "UPDATE users SET username = ?, password = ? WHERE username = ?";
+    loginDB.run(sql, [data.username, data.password, data.old_username], (err, row) => {
       if (err) {
         console.error(err.message);
         return;
@@ -189,6 +192,7 @@ io.on('connection', (socket) => {
       socket.emit("profil edited", data);
     });
   });
+
   socket.on("delete profil", (username) => {
     sql = "DELETE FROM users WHERE username = ?";
     loginDB.run(sql, [username], (err, row) => {
@@ -199,6 +203,7 @@ io.on('connection', (socket) => {
        socket.emit("profil deleted", username);
     });
    });
+
   socket.on("getDB", () => {
    const sql = 'SELECT * FROM users';
    loginDB.all(sql, [], (err, rows) => {
@@ -209,6 +214,17 @@ io.on('connection', (socket) => {
      socket.emit('recive DB', rows);
    });
   });
+
+  socket.on("getID", (username) => {
+    const sql = 'SELECT id FROM users WHERE username = ? ';
+    loginDB.get(sql, [username], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      socket.emit("receiveID", row.id);
+    });
+   });
 
   socket.on("conditions acceptées", (data) => {
     sql = 'SELECT * FROM users WHERE username = ?';

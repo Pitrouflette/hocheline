@@ -119,11 +119,11 @@ transition: 0.5s;
 }
 .links{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 .links a{
     position: relative;
-    left: -55px;
     top: 25px;
     font-size:  1em;
     color: #046b90;

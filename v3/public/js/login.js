@@ -7,6 +7,12 @@ submit.addEventListener('click', () => {
     socket.emit('login', username, password);
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
+    socket.emit("getID", (username));    
+});
+
+socket.on("receiveID", (id) => {
+    localStorage.setItem("id", id);
+    window.location.href = 'post.html'; 
 });
 
 socket.on('redirect', (data) => {

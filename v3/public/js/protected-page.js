@@ -17,9 +17,8 @@ sockets.on("sendData", (data) => {
   console.log(data.admin);
   if (data.admin == "true") {
     nav.innerHTML = `
-      <a href="home.html" class="nav-link">accueil</a>
+      <a href="post.html" class="nav-link">accueil</a>
       <a href="chat.html" class="nav-link">chat</a>
-      <a href="post.html" class="nav-link">post</a>
       <a href="poster.html" class="nav-link">poster</a>
       <a href="profil.html" class="nav-link">compte</a>
       <a href="admin.html" class="nav-link admin">admin panel</a>
@@ -39,7 +38,7 @@ async function loadHeader() {
       document.getElementById('header-container').innerHTML = headerContent;
       
       // Maintenant que le header est chargé, nous pouvons accéder à l'élément title
-      document.getElementById('title').innerHTML = "Hocheline - " + localStorage.getItem('username');
+      document.getElementById('title').innerHTML = "#" + localStorage.getItem('id');
       
       // Et configurer la navigation selon les droits d'administrateur
       updateNavigation();
