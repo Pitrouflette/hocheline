@@ -7,7 +7,6 @@ submit.addEventListener('click', () => {
     socket.emit('login', username, password);
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
-    socket.emit("getID", (username));    
 });
 
 socket.on("receiveID", (id) => {
@@ -16,6 +15,7 @@ socket.on("receiveID", (id) => {
 });
 
 socket.on('redirect', (data) => {
+    socket.emit("getID", (username));
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('username', data.username);
     localStorage.setItem('conditions', data.cond);
