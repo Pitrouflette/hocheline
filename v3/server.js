@@ -272,7 +272,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(port, "0.0.0.0",() => {
+http.listen(port, "0.0.0.0",() => {
   console.log('\n' + chalk.gray('────────────────────────────────────────────────────────────────────────────────────────\n'));
 
   console.log(chalk.magentaBright(figlet.textSync('Gossip Hoche', {font: 'ANSI Shadow',horizontalLayout: 'default',verticalLayout: 'default'})));
