@@ -12,8 +12,6 @@ const figlet = require('figlet');
 
 const filePath = 'public/posts/post.json';
 
-app.use(express.static('public/html'));
-
 let onlineCount = 0;
 let visitCount = 0;
 let messageCount = 0;
@@ -30,9 +28,9 @@ sql = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username,password
 loginDB.run(sql);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/html/home.html');
+  res.sendFile(__dirname + '/public/html/conditions.html');
 });
-app.use(express.static(__dirname + '/public/html'));
+app.use(express.static(path.join(__dirname, 'public/html')));
 io.on('connection', (socket) => {
 
   const clientIp = socket.handshake.address; 
