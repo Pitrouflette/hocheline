@@ -23,9 +23,10 @@ socket.emit("admin data", "");
 socket.on("admin", (data) => {
     console.log(data);
     onlines.innerHTML = (data.onlines) / 2;
-    visiters.innerHTML = (data.visiters / 2);
+    visiters.innerHTML = (data.visiters);
     messages.innerHTML = (data.messages);
     posts.innerHTML = (data.posts);
+    console.log(data.posts);
 });
 
 

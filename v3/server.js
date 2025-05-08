@@ -36,7 +36,6 @@ app.use(express.static(path.join(__dirname, 'public/html')));
 io.on('connection', (socket) => {
   const clientIp = socket.handshake.address;
   onlineCount++;
-  visitCount++;
 
   io.emit('display post', postVar);
 
@@ -64,6 +63,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on("getPosts", async () => {
+    visitCount++;
     try {
       const data = await fsp.readFile('public/posts/post.json', 'utf8');
       const jsonData = JSON.parse(data || '{}');
@@ -99,6 +99,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on("AgreedPost", async (index) => {
+    postCount++;
     try {
       const rawPath = 'public/posts/post-raw.json';
       const postPath = 'public/posts/post.json';
@@ -116,8 +117,6 @@ io.on('connection', (socket) => {
       console.error("Erreur AgreedPost:", err);
     }
   });
-
-  socket.on("postIncreas", () => postCount++);
 
   socket.on("admin data", () => {
     socket.emit("admin", {
