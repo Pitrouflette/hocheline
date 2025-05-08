@@ -29,13 +29,17 @@ socket.on("profil deleted", (username) => {
 });
 
 submit.addEventListener('click', function(event){
-    if(localStorage.getItem("username") == username.value || localStorage.getItem("password") == password.value){
+    if(localStorage.getItem("username") !== username.value || localStorage.getItem("password") !== password.value){
         const data = {
             old_username: localStorage.getItem("username"),
             username: username.value,
             password: password.value
         };
-        socket.emit("checkUsername", (data));
+        if(localStorage.getItem("username") !== username.value){
+            socket.emit("checkUsername", (data));
+        }else{
+            socket.emit("edit profil", data);
+        }
     }
 });
 

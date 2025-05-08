@@ -1,59 +1,198 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+/* Variables pour faciliter la personnalisation */
+:root {
+  --primary-color: #0a192f;       /* Bleu foncé */
+  --secondary-color: #112240;     /* Bleu moyen */
+  --accent-color: #64ffda;        /* Turquoise */
+  --text-primary: #e6f1ff;        /* Blanc bleuté */
+  --text-secondary: #8892b0;      /* Gris bleuté */
+  --danger-color: #ff6b6b;        /* Rouge pour les alertes */
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --transition-speed: 0.3s;
+}
+/* Panneau d'administration global */
+#admin-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
 
-  #admin-panel {
-    width: 100%;
-    height: 100vh;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-  }
+/* En-tête du tableau de bord admin */
+#admin-header {
+  background-color: var(--secondary-color);
+  color: var(--accent-color);
+  padding: 16px 24px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  text-align: center;
+}
 
-  #admin-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-size: 24px;
-  }
+/* Conteneur principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 24px;
+}
 
+/* Conteneur des statistiques */
+#stats-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Boîte de statistique individuelle */
+.stat-box {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.stat-box h2 {
+  color: var(--accent-color);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.stat-box p {
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+/* Conteneur de base de données */
+.db_container {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.db_container h2 {
+  color: var(--accent-color);
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Zone d'affichage de la base de données */
+#db {
+  overflow-x: auto;
+  background-color: rgba(10, 25, 47, 0.5);
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 200px;
+}
+
+/* Table pour les données */
+#db table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-secondary);
+}
+
+#db th {
+  background-color: rgba(100, 255, 218, 0.1);
+  color: var(--accent-color);
+  padding: 12px;
+  text-align: left;
+  font-weight: 500;
+  border-bottom: 2px solid rgba(100, 255, 218, 0.2);
+}
+
+#db td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+#db tr:hover {
+  background-color: rgba(100, 255, 218, 0.05);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #53d6b6;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
   #stats-container {
-    display:flex;
-    margin: 10px;
+      grid-template-columns: repeat(2, 1fr);
   }
-
-  .stat-box {
-    background-color: #fff;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+  .db_container, #admin-header {
+      padding: 15px;
   }
-
-.container{
-    display:flex;
-    justify-content: center;
-    align-items: center;
+  
+  #admin-header {
+      font-size: 1.6rem;
+  }
 }
 
-.db_container{
-    display:flex;
-    justify-content: center;
-    align-items: center;
+@media (max-width: 600px) {
+  #stats-container {
+      grid-template-columns: 1fr;
+  }
+  
+  #admin-panel {
+      padding: 15px;
+  }
+  
+  .stat-box h2 {
+      font-size: 1.2rem;
+  }
+  
+  .stat-box p {
+      font-size: 2rem;
+  }
+  
+  .db_container h2 {
+      font-size: 1.4rem;
+  }
+  
+  #admin-header {
+      font-size: 1.4rem;
+      padding: 12px;
+  }
 }
 
-#db{
-    font-size: larger;
-}
-
-.even-row {
-    background-color: #333; /* Couleur de fond pour les lignes paires */
-    color: #f4f4f4;
-}
-
-.odd-row {
-  background-color: #ffffff; /* Couleur de fond pour les lignes impaires */
-}
+/* Ajouter le lien Google Fonts pour Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');

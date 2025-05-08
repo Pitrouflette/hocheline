@@ -1,50 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hocheline - Tableau de Bord - Statistiques</title>
-  <link rel="stylesheet" href="css/admin.css">
-  <link rel="shortcut icon" href="../logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hocheline - Tableau de Bord - Statistiques</title>
+    <link rel="shortcut icon" href="../logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/73200890b1.js' crossorigin='anonymous'></script>
 </head>
 <body>
-  <div id="admin-panel">
-    <div id="admin-header">Tableau de Bord - Statistiquess</div>
-    <div class="container">
-        <div id="stats-container">
-            <div class="stat-box">
-                <h2>Utilisateurs en ligne</h2>
-                <p id="online-users">0</p>
-            </div>
-            <div class="stat-box">
-                <h2>Nombre de visites</h2>
-                <p id="total-visits">0</p>
-            </div>
-            <div class="stat-box">
-                <h2>Nombre de publications</h2>
-                <p id="total-post">0</p>
-            </div>
-            <div class="stat-box">
-                <h2>Nombre de messages</h2>
-                <p id="total-message">0</p>
-            </div>
-            <div class="stat-box">
-                <h2>Nombre de comptes</h2>s
-                <p id="total-account">0</p>
-            </div>
-        </div>
-    </div>
-    <div class="db_container">
-        <h2>Base de données</h2>
-    </div>
+    <div id="header-container" class="header"></div>
+
+    <div class="main-content">
+
+        <div id="admin-panel">
+
+            <div id="admin-header">Admin Panel - Statistics</div>
     
-    <div class="db_container">
-        <div id="db">
-            
-        </div>
-    </div>
+            <div class="container">
     
-  </div>
+                <div id="stats-container">
+                    <div class="stat-box">
+                        <h2>Utilisateurs en ligne</h2>
+                        <p id="online-users">0</p>
+                    </div>
+    
+                    <div class="stat-box">
+                        <h2>Nombre de visites</h2>
+                        <p id="total-visits">0</p>
+                    </div>
+    
+                    <div class="stat-box">
+                        <h2>Nombre de publications</h2>
+                        <p id="total-post">0</p>
+                    </div>
+    
+                    <div class="stat-box">
+                        <h2>Nombre de messages</h2>
+                        <p id="total-message">0</p>
+                    </div>
+    
+                    <div class="stat-box">
+                        <h2>Nombre de comptes</h2>
+                        <p id="total-account">0</p>
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <div class="db_container">
+                <h2>Base de données</h2>
+                <div id="db"></div>
+            </div>
+
+        </div>
+
+    </div>
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
   <script src="../js/admin.js"></script>
   <script src="../js/protected-page.js"></script>

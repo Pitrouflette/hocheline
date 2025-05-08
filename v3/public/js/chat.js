@@ -4,11 +4,8 @@ const messageContainer = document.getElementById('message-container');
 const messageInput = document.getElementById('user-message');
 const sendButton = document.getElementById('send-btn');
 
-socket.on('display message', (msgNom) => {
-  socket.emit("check admin", msgNom);
-});
-
 socket.on("display message checked", (messageData) => {
+  console.log(messageData);
   const messageElement = document.createElement('div');
   messageElement.classList.add('message');
   messageElement.classList.add(messageData.check === "admin" ? "admin2-message" : "server-message");
@@ -22,15 +19,15 @@ function sendMessage(){
   if (message.trim() !== '') {
     const msgNom = {
       username: "#" + localStorage.getItem("id"),
-      message: message
+      message: message,
+      username_db : localStorage.getItem("username")
     };
-    socket.emit('chat message', msgNom);
+    socket.emit("message admin?", msgNom);
     messageInput.value = '';
   }
 }
 
 sendButton.addEventListener('click', () => {
-  socket.emit('send message');
   sendMessage();
 });
 
