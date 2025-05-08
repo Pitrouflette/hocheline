@@ -32,8 +32,11 @@ socks.on("recieveRawPosts", (postList) => {
       const article = document.createElement('div');
       article.classList.add("cta");
       article.innerHTML = element;
-      article.appendChild(discare);
-      article.appendChild(agree);
+      div_vote = document.createElement("div");
+      div_vote.classList = "vote_div"
+      div_vote.appendChild(discare);
+      div_vote.appendChild(agree);
+      article.appendChild(div_vote);
       rumor.appendChild(article);
     });
   });

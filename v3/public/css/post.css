@@ -31,30 +31,38 @@ body {
     flex-direction: column;
 }
 
-.container{
+.container {
     flex: 1;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0 1rem;
 }
 
 /* Posts */
 .cta {
-    margin: 1rem;
+    margin-top: 1rem;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    border-radius: 2rem;
-    padding: 20px;
-    background-color: var(--secondary-color);
-    border: solid 5px var(--accent-color);
-    color:var(--text-secondary);
-    box-shadow: var(--card-shadow);
+    gap: 1rem;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); /* Aqua → Bleu */
+    color: var(--text-secondary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cta i{
-    margin-top: 0.5rem;
+.cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.vote_div i{
+    cursor: pointer;
     font-size: 3rem;
-}
-
-.cta i:hover{
-    cursor:pointer;
+    margin-left: 5rem;
+    margin-top: 0.5rem;
 }
 
 .agree{
