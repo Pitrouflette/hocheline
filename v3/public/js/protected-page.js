@@ -1,5 +1,11 @@
 const sockets = io();
 
+sockets.emit("getID", (localStorage.getItem("username")));
+
+sockets.on("receiveID", (id) => {
+  localStorage.setItem("id", id);
+});
+
 if (localStorage.getItem('isLoggedIn') != "true") {
   window.location.href = 'login.html';
 } else {

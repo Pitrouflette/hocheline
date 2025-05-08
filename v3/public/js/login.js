@@ -19,5 +19,6 @@ socket.on('redirect', (data) => {
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('username', data.username);
     localStorage.setItem('conditions', data.cond);
+    localStorage.setItem('id', data.id);
     window.location.href = data.url;
 });
