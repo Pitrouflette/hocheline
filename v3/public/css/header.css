@@ -1,7 +1,7 @@
 /* Variables pour faciliter la personnalisation */
 :root {
     --primary-color: black;       /* Bleu foncé */
-    --secondary-color: #1e1e1f;     /* Bleu moyen */
+    --secondary-color: rgb(34, 34, 34);     /* Bleu moyen */
     --accent-color: #64ffda;        /* Turquoise */
     --text-primary: #e6f1ff;        /* Blanc bleuté */
     --text-secondary: #8892b0;      /* Gris bleuté */
