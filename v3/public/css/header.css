@@ -2,7 +2,7 @@
 :root {
     --primary-color: black;       /* Bleu foncé */
     --secondary-color: rgb(34, 34, 34);     /* Bleu moyen */
-    --accent-color: #64ffda;        /* Turquoise */
+    --accent-color: rgb(131, 19, 131);        /* Turquoise */
     --text-primary: #e6f1ff;        /* Blanc bleuté */
     --text-secondary: #8892b0;      /* Gris bleuté */
     --danger-color: #ff6b6b;        /* Rouge pour les alertes */
