@@ -11,6 +11,7 @@
     --header-width: 250px;          /* Largeur du header latéral */
     --hover-button: rgb(90, 14, 90);
     --input-outline: black;
+    --input-background: black;
 }
 
 /* Reset et styles globaux */
