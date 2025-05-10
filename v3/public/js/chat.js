@@ -5,7 +5,6 @@ const messageInput = document.getElementById('user-message');
 const sendButton = document.getElementById('send-btn');
 
 socket.on("display message checked", (messageData) => {
-  console.log(messageData);
   const messageElement = document.createElement('div');
   messageElement.classList.add('message');
   messageElement.classList.add(messageData.check === "admin" ? "admin2-message" : "server-message");

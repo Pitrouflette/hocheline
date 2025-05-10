@@ -17,7 +17,6 @@ sockets.on("sendData", (data) => {
     window.location.href = 'conditions.html';
   }
   const nav = document.getElementById("nav");
-  console.log(data.admin);
   if (data.admin == "true") {
     nav.innerHTML = `
       <a href="post.html" class="nav-link"><i class='fas fa-home' ></i> home</a>

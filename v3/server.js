@@ -156,7 +156,7 @@ io.on('connection', (socket) => {
         data.check = row ? "admin" : "user";
         data.message = `${data.username} >>> ${data.message}`;
         messageCount++;
-        socket.emit("display message checked", data);
+        io.emit("display message checked", data);
       });
     });
   });
