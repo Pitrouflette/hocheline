@@ -7,12 +7,18 @@ const closeButton = document.querySelector('.close-button');
 socks.emit('getPosts');
 
 socks.on("display post", (postList) => {
-  var rumor = document.getElementById("post-container");
-  rumor.innerHTML = "";
+  container.innerHTML = "";
+  if (postList.length === 0){
+    NoPostYet = document.createElement("h1");
+    NoPostYet.innerHTML = "No post to display yet ...";
+    NoPostYet.style = "text-align: center;";
+    container.appendChild(NoPostYet);
+    return;
+  }
   for (var element of postList.slice().reverse()) {
     const article = document.createElement('div');
     article.classList.add("cta");
     article.innerHTML = element;
-    rumor.appendChild(article);
+    container.appendChild(article);
   }
 });

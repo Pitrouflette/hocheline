@@ -11,7 +11,13 @@ socks.on("recieveRawPosts", (postList) => {
     var rumor = document.getElementById("post-container");
     rumor.innerHTML = "";
     const reversedPosts = postList.slice().reverse();
-  
+    if (postList.length === 0){
+      NoPostYet = document.createElement("h1");
+      NoPostYet.innerHTML = "No posts pending validation ...";
+      NoPostYet.style = "text-align: center;";
+      container.appendChild(NoPostYet);
+      return;
+    }
     reversedPosts.forEach((element, index) => {
       const discare = document.createElement("i");
       discare.classList = "discare fa-solid fa-thumbs-down";
