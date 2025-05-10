@@ -177,7 +177,7 @@ body {
         height: 60px;
         flex-direction: row;
         justify-content: space-around;
-        background: var(--primary-color);
+        background: var(--accent-color);
         box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     }
     
