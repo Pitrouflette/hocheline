@@ -196,11 +196,11 @@ body {
     }
     
     /* Cacher le texte des liens, ne montrer que les icônes */
-    .nav-link span,
+    /*.nav-link span,
     .nav-link:not(i) {
         font-size: 0;
         display: inline;
-    }
+    }*/
     
     .nav-link i {
         font-size: 1.4rem;
