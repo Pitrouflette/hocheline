@@ -101,7 +101,7 @@ body {
 }
 
 #send-btn:hover {
-    background-color: #53d6b6;
+    background-color: var(--hover-button);
 }
 
 /* Messages */
