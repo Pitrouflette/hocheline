@@ -42,3 +42,7 @@ Thumbs.db
 .cache
 .npm
 .eslintcache
+
+# Data
+/v3/dbusers.db
+/v3/posts
