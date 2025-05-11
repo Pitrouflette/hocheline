@@ -1,13 +1,10 @@
-/* profil.css - Style spécifique à la page profil */
-
 /* Layout de la page profil */
 .profile-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: 
-        "profile options"
-        "friends add-friend";
+        "profile options";
     gap: 24px;
     padding: 32px;
     width: 100%;
@@ -17,12 +14,12 @@
 }
 
 /* Styles des cartes */
-.profile-card, .options-card, .add-friend-card, .friend-list-card {
+.profile-card, .options-card {
     background-color: var(--secondary-color);
     border-radius: 10px;
     padding: 25px;
     box-shadow: var(--card-shadow);
-    border: 1px solid rgba(100, 255, 218, 0.1);
+    border: 1px solid var(--input-outline);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
     display: flex;
@@ -31,7 +28,7 @@
     box-sizing: border-box;
 }
 
-.profile-card:hover, .options-card:hover, .add-friend-card:hover, .friend-list-card:hover {
+.profile-card:hover, .options-card:hover{
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
@@ -42,14 +39,6 @@
 
 .options-card {
     grid-area: options;
-}
-
-.add-friend-card {
-    grid-area: add-friend;
-}
-
-.friend-list-card {
-    grid-area: friends;
 }
 
 /* Style du formulaire */
@@ -75,8 +64,8 @@ label {
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
-    background-color: rgba(10, 25, 47, 0.6);
-    border: 2px solid rgba(100, 255, 218, 0.2);
+    background-color: var(--input-background);
+    border: 2px solid var(--input-outline);
     border-radius: 8px;
     padding: 12px 16px;
     color: var(--text-primary);
@@ -89,7 +78,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 
 input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
     outline: none;
-    border-color: var(--accent-color);
+    border-color: var(--border-outline);
     box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
 }
 
@@ -121,7 +110,7 @@ input::placeholder {
 }
 
 .primary-btn:hover {
-    background-color: #53d6b6;
+    background-color: var(--hover-button);
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
@@ -159,82 +148,6 @@ input::placeholder {
     box-sizing: border-box;
 }
 
-/* Section ajout d'ami */
-.friend-input-container {
-    display: flex;
-    gap: 12px;
-    margin-top: 15px;
-    width: 100%;
-}
-
-.friend-input-container input {
-    flex-grow: 1;
-}
-
-/* Section liste d'amis */
-.friend-list-container {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    flex-grow: 1;
-    min-height: 150px;
-    width: 100%;
-}
-
-/* Style pour chaque ami dans la liste */
-.friend-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(10, 25, 47, 0.5);
-    padding: 12px 15px;
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-color);
-    transition: background-color 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.friend-item:hover {
-    background-color: rgba(10, 25, 47, 0.7);
-}
-
-.friend-name {
-    color: var(--text-primary);
-    font-weight: 500;
-    word-break: break-word;
-    padding-right: 10px;
-}
-
-.friend-actions {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.friend-action-btn {
-    background: none;
-    border: none;
-    color: var(--accent-color);
-    cursor: pointer;
-    transition: color 0.3s ease;
-    padding: 5px 10px;
-}
-
-.friend-action-btn:hover {
-    color: #53d6b6;
-}
-
-.friend-action-btn.remove {
-    color: var(--danger-color);
-}
-
-.friend-action-btn.remove:hover {
-    color: #ff5252;
-}
-
 /* Titres de section */
 .section-title {
     font-size: 1.75rem;
@@ -256,14 +169,12 @@ input::placeholder {
         grid-template-columns: 1fr;
         grid-template-areas:
             "profile"
-            "options"
-            "add-friend"
-            "friends";
+            "options";
         padding: 20px;
         gap: 20px;
     }
     
-    .profile-card, .options-card, .add-friend-card, .friend-list-card {
+    .profile-card, .options-card {
         padding: 20px;
     }
 
@@ -288,32 +199,14 @@ input::placeholder {
         gap: 15px;
     }
     
-    .friend-input-container {
-        flex-direction: column;
-    }
-    
-    .friend-input-container button {
-        width: 100%;
-    }
-    
     .section-title {
         font-size: 1.4rem;
     }
 
-    .profile-card, .options-card, .add-friend-card, .friend-list-card {
+    .profile-card, .options-card{
         padding: 16px;
     }
 
-    .friend-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    
-    .friend-actions {
-        width: 100%;
-        justify-content: flex-end;
-    }
 }
 
 @media (max-width: 400px) {
@@ -322,7 +215,7 @@ input::placeholder {
         gap: 12px;
     }
 
-    .profile-card, .options-card, .add-friend-card, .friend-list-card {
+    .profile-card, .options-card{
         padding: 14px;
     }
 

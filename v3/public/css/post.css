@@ -1,14 +1,4 @@
-/* Variables pour faciliter la personnalisation */
-:root {
-    --primary-color: #0a192f;       /* Bleu foncé */
-    --secondary-color: #112240;     /* Bleu moyen */
-    --accent-color: #64ffda;        /* Turquoise */
-    --text-primary: #e6f1ff;        /* Blanc bleuté */
-    --text-secondary: #8892b0;      /* Gris bleuté */
-    --danger-color: #ff6b6b;        /* Rouge pour les alertes */
-    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    --transition-speed: 0.3s;
-}
+
 
 /* Reset et styles globaux */
 * {
@@ -47,7 +37,7 @@ body {
     gap: 1rem;
     border-radius: 1.5rem;
     padding: 2rem;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); /* Aqua → Bleu */
+    background: linear-gradient(to right, var(--gradiant), var(--primary-color)); /* Aqua → Bleu */
     color: var(--text-secondary);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
